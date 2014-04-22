@@ -5,7 +5,7 @@
  * ************************************************
  */
 
-namespace MyBase\Doctrine;
+namespace Thorr\Persistence\Doctrine;
 
 use Doctrine\ORM\EntityManager;
 

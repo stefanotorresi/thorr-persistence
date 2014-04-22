@@ -5,12 +5,10 @@
  * ************************************************
  */
 
-namespace MyBase\Doctrine;
+namespace Thorr\Persistence\Doctrine\Repository;
 
-use MyBase\DataMapper\MapperEvent as Event;
+use Thorr\Persistence\Repository\RepositoryEvent as Event;
 use Doctrine\ORM as Doctrine;
-use Doctrine\ORM\Tools\Pagination\Paginator as DoctrinePaginator;
-use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrinePaginatorAdapter;
 use Zend\EventManager\EventManagerAwareTrait;
 use Zend\Paginator\Paginator;
 
@@ -18,10 +16,10 @@ use Zend\Paginator\Paginator;
  * This is intended to be used on Doctrine\EntityRepository subclasses
  *
  * Class EntityMapperTrait
- * @package MyBase\Doctrine
+ * @package Thorr\Persistence\Doctrine
  * @property Doctrine\EntityManager $_em
  */
-trait EntityMapperTrait
+trait EntityRepositoryTrait
 {
     use EventManagerAwareTrait;
 
@@ -81,21 +79,5 @@ trait EntityMapperTrait
         $this->_em = $entityManager;
 
         return $this;
-    }
-
-    /**
-     * @param  Doctrine\Query|Doctrine\QueryBuilder $query
-     * @param  int                                  $page
-     * @param  int                                  $itemCountPerPage
-     * @param  bool                                 $fetchJoinCollection
-     * @return Paginator
-     */
-    protected function getPaginatorFromQuery($query, $page, $itemCountPerPage = 20, $fetchJoinCollection = true)
-    {
-        $paginator = new Paginator(new DoctrinePaginatorAdapter(new DoctrinePaginator($query, $fetchJoinCollection)));
-        $paginator->setDefaultItemCountPerPage($itemCountPerPage);
-        $paginator->setCurrentPageNumber($page);
-
-        return $paginator;
     }
 }

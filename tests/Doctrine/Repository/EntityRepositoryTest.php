@@ -5,32 +5,26 @@
  * ************************************************
  */
 
-namespace MyBase\Test\Doctrine;
+namespace Thorr\Persistence\Test\Doctrine;
 
 use Doctrine\ORM\EntityManager;
-use MyBase\DataMapper\MapperEvent;
-use MyBase\Doctrine\EntityMapper;
+use Thorr\Persistence\Repository\RepositoryEvent;
+use Thorr\Persistence\Doctrine\Repository\EntityRepository;
 use PHPUnit_Framework_TestCase;
 
-class EntityMapperTest extends PHPUnit_Framework_TestCase
+class EntityRepositoryTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var EntityMapper
+     * @var EntityRepository
      */
-    protected $entityMapper;
+    protected $entityRepository;
 
     public function setUp()
     {
         $entityManager = $this->getMock('\Doctrine\ORM\EntityManager', [], [], '', false);
-//        $entityManager->expects($this->any())
-//            ->method('getUnitOfWork')
-//            ->will($this->returnValue($unitOfWork));
-
         $classMetadata = $this->getMock('\Doctrine\ORM\Mapping\ClassMetadata', [], [], '', false);
 
-        $entityMapper = new EntityMapper($entityManager, $classMetadata);
-
-        $this->entityMapper = $entityMapper;
+        $this->entityRepository = new EntityRepository($entityManager, $classMetadata);
     }
 
     public function testFlush()
@@ -40,26 +34,26 @@ class EntityMapperTest extends PHPUnit_Framework_TestCase
         $flushPreTriggered = false;
         $flushPostTriggered = false;
 
-        $this->entityMapper->getEventManager()->attach(
-            MapperEvent::FLUSH_PRE,
-            function (MapperEvent $event) use (&$flushPreTriggered) {
+        $this->entityRepository->getEventManager()->attach(
+            RepositoryEvent::FLUSH_PRE,
+            function (RepositoryEvent $event) use (&$flushPreTriggered) {
                 $flushPreTriggered = true;
             }
         );
 
-        $this->entityMapper->getEventManager()->attach(
-            MapperEvent::FLUSH_POST,
-            function (MapperEvent $event) use (&$flushPostTriggered) {
+        $this->entityRepository->getEventManager()->attach(
+            RepositoryEvent::FLUSH_POST,
+            function (RepositoryEvent $event) use (&$flushPostTriggered) {
                 $flushPostTriggered = true;
             }
         );
 
-        $this->entityMapper->getEntityManager()
+        $this->entityRepository->getEntityManager()
             ->expects($this->atLeastOnce())
             ->method('flush')
             ->with($entity);
 
-        $this->entityMapper->flush($entity);
+        $this->entityRepository->flush($entity);
 
         $this->assertTrue($flushPreTriggered);
         $this->assertTrue($flushPostTriggered);
@@ -72,30 +66,30 @@ class EntityMapperTest extends PHPUnit_Framework_TestCase
         $savePreTriggered = false;
         $savePostTriggered = false;
 
-        $this->entityMapper->getEventManager()->attach(
-            MapperEvent::SAVE_PRE,
-            function (MapperEvent $event) use (&$savePreTriggered) {
+        $this->entityRepository->getEventManager()->attach(
+            RepositoryEvent::SAVE_PRE,
+            function (RepositoryEvent $event) use (&$savePreTriggered) {
                 $savePreTriggered = true;
             }
         );
 
-        $this->entityMapper->getEventManager()->attach(
-            MapperEvent::SAVE_POST,
-            function (MapperEvent $event) use (&$savePostTriggered) {
+        $this->entityRepository->getEventManager()->attach(
+            RepositoryEvent::SAVE_POST,
+            function (RepositoryEvent $event) use (&$savePostTriggered) {
                 $savePostTriggered = true;
             }
         );
 
-        $this->entityMapper->getEntityManager()
+        $this->entityRepository->getEntityManager()
             ->expects($this->atLeastOnce())
             ->method('persist')
             ->with($entity);
 
-        $this->entityMapper->getEntityManager()
+        $this->entityRepository->getEntityManager()
             ->expects($this->atLeastOnce())
             ->method('flush');
 
-        $result = $this->entityMapper->save($entity);
+        $result = $this->entityRepository->save($entity);
 
         $this->assertTrue($savePreTriggered);
         $this->assertTrue($savePostTriggered);
@@ -104,15 +98,15 @@ class EntityMapperTest extends PHPUnit_Framework_TestCase
 
     public function testSaveWithoutFlushing()
     {
-        $this->entityMapper->getEntityManager()
+        $this->entityRepository->getEntityManager()
             ->expects($this->atLeastOnce())
             ->method('persist');
 
-        $this->entityMapper->getEntityManager()
+        $this->entityRepository->getEntityManager()
             ->expects($this->never())
             ->method('flush');
 
-        $this->entityMapper->save(null, false);
+        $this->entityRepository->save(null, false);
     }
 
     public function testRemove()
@@ -122,30 +116,30 @@ class EntityMapperTest extends PHPUnit_Framework_TestCase
         $removePreTriggered = false;
         $removePostTriggered = false;
 
-        $this->entityMapper->getEventManager()->attach(
-            MapperEvent::REMOVE_PRE,
-            function (MapperEvent $event) use (&$removePreTriggered) {
+        $this->entityRepository->getEventManager()->attach(
+            RepositoryEvent::REMOVE_PRE,
+            function (RepositoryEvent $event) use (&$removePreTriggered) {
                 $removePreTriggered = true;
             }
         );
 
-        $this->entityMapper->getEventManager()->attach(
-            MapperEvent::REMOVE_POST,
-            function (MapperEvent $event) use (&$removePostTriggered) {
+        $this->entityRepository->getEventManager()->attach(
+            RepositoryEvent::REMOVE_POST,
+            function (RepositoryEvent $event) use (&$removePostTriggered) {
                 $removePostTriggered = true;
             }
         );
 
-        $this->entityMapper->getEntityManager()
+        $this->entityRepository->getEntityManager()
             ->expects($this->atLeastOnce())
             ->method('remove')
             ->with($entity);
 
-        $this->entityMapper->getEntityManager()
+        $this->entityRepository->getEntityManager()
             ->expects($this->atLeastOnce())
             ->method('flush');
 
-        $this->entityMapper->remove($entity);
+        $this->entityRepository->remove($entity);
 
         $this->assertTrue($removePreTriggered);
         $this->assertTrue($removePostTriggered);
@@ -153,22 +147,22 @@ class EntityMapperTest extends PHPUnit_Framework_TestCase
 
     public function testRemoveWithoutFlushing()
     {
-        $this->entityMapper->getEntityManager()
+        $this->entityRepository->getEntityManager()
             ->expects($this->atLeastOnce())
             ->method('remove');
 
-        $this->entityMapper->getEntityManager()
+        $this->entityRepository->getEntityManager()
             ->expects($this->never())
             ->method('flush');
 
-        $this->entityMapper->remove(null, false);
+        $this->entityRepository->remove(null, false);
     }
 
     public function testEntityManagerSetterProvidesFluentInterface()
     {
         $this->assertSame(
-            $this->entityMapper,
-            $this->entityMapper->setEntityManager($this->entityMapper->getEntityManager())
+            $this->entityRepository,
+            $this->entityRepository->setEntityManager($this->entityRepository->getEntityManager())
         );
     }
 }

@@ -5,11 +5,11 @@
  * ************************************************
  */
 
-namespace MyBase\DataMapper;
+namespace Thorr\Persistence\Repository;
 
 use Zend\EventManager\Event;
 
-class MapperEvent extends Event
+class RepositoryEvent extends Event
 {
     const SAVE_PRE      = 'save.pre';
     const SAVE_POST     = 'save.post';

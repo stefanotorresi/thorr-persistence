@@ -5,10 +5,10 @@
  * ************************************************
  */
 
-namespace MyBase\Doctrine;
+namespace Thorr\Persistence\Doctrine\Repository;
 
 use Doctrine\ORM as Doctrine;
-use MyBase\DataMapper\MapperInterface;
+use Thorr\Persistence\Repository\RepositoryInterface;
 use Zend\EventManager\EventManagerAwareInterface;
 
 /**
@@ -16,14 +16,14 @@ use Zend\EventManager\EventManagerAwareInterface;
  * implements a generic data mapper contract for compatibility layers
  *
  * Class EntityMapper
- * @package MyBase\Doctrine
+ * @package Thorr\Persistence\Doctrine
  */
-class EntityMapper extends Doctrine\EntityRepository implements
-    MapperInterface,
+class EntityRepository extends Doctrine\EntityRepository implements
+    RepositoryInterface,
     EventManagerAwareInterface,
     EntityManagerAwareInterface
 {
-    use EntityMapperTrait;
+    use EntityRepositoryTrait;
 
     /**
      * @return Doctrine\EntityManager

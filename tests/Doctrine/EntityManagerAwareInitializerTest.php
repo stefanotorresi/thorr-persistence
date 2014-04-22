@@ -5,10 +5,10 @@
  * ************************************************
  */
 
-namespace MyBase\Test\Doctrine;
+namespace Thorr\Persistence\Test\Doctrine;
 
 use Doctrine\ORM\EntityManager;
-use MyBase\Doctrine\EntityManagerAwareInitializer;
+use Thorr\Persistence\Doctrine\EntityManagerAwareInitializer;
 use PHPUnit_Framework_TestCase;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -42,7 +42,7 @@ class EntityManagerAwareInitializerTest extends PHPUnit_Framework_TestCase
     {
         $initializer = new EntityManagerAwareInitializer();
 
-        $instance = $this->getMock('\MyBase\Doctrine\EntityManagerAwareInterface');
+        $instance = $this->getMock('\Thorr\Persistence\Doctrine\EntityManagerAwareInterface');
         $instance->expects($this->atLeastOnce())
                  ->method('setEntityManager')
                  ->with($this->entityManager);

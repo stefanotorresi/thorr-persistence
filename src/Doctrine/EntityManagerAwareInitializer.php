@@ -5,7 +5,7 @@
  * ************************************************
  */
 
-namespace MyBase\Doctrine;
+namespace Thorr\Persistence\Doctrine;
 
 use Doctrine\ORM\EntityManager;
 use Zend\ServiceManager\InitializerInterface;
@@ -23,13 +23,12 @@ class EntityManagerAwareInitializer implements InitializerInterface
             return;
         }
 
-        $serviceManager = ( $serviceLocator instanceof AbstractPluginManager ) ?
-            $serviceLocator->getServiceLocator () : $serviceLocator;
+        $serviceManager = $serviceLocator instanceof AbstractPluginManager ?
+            $serviceLocator->getServiceLocator() : $serviceLocator;
 
-        /* @var $objectManager EntityManager */
-        $objectManager = $serviceManager->get('Doctrine\ORM\EntityManager');
+        /* @var $entityManager EntityManager */
+        $entityManager = $serviceManager->get('Doctrine\ORM\EntityManager');
 
-        $instance->setEntityManager($objectManager);
+        $instance->setEntityManager($entityManager);
     }
-
 }

@@ -5,9 +5,9 @@
  * ************************************************
  */
 
-namespace MyBase\DataMapper;
+namespace Thorr\Persistence\Repository;
 
-interface MapperInterface
+interface RepositoryInterface
 {
     /**
      * @param $id

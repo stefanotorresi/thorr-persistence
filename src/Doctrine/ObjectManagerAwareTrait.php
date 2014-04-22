@@ -5,7 +5,7 @@
  * ************************************************
  */
 
-namespace MyBase\Doctrine;
+namespace Thorr\Persistence\Doctrine;
 
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -38,5 +38,4 @@ trait ObjectManagerAwareTrait
     {
         return $this->objectManager;
     }
-
 }
