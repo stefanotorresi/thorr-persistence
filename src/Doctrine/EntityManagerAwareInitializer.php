@@ -1,8 +1,7 @@
 <?php
-
 /**
- * Copyright (c) 2013 Stefano Torresi (http://stefanotorresi.it)
- * See the file LICENSE.txt for copying permission.
+ * @author Stefano Torresi (http://stefanotorresi.it)
+ * @license See the file LICENSE.txt for copying permission.
  * ************************************************
  */
 
