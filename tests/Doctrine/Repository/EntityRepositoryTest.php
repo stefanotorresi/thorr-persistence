@@ -7,7 +7,6 @@
 
 namespace Thorr\Persistence\Test\Doctrine;
 
-use Doctrine\ORM\EntityManager;
 use Thorr\Persistence\Repository\RepositoryEvent;
 use Thorr\Persistence\Doctrine\Repository\EntityRepository;
 use PHPUnit_Framework_TestCase;

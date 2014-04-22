@@ -8,6 +8,7 @@
 namespace Thorr\Persistence\Doctrine\Repository;
 
 use Doctrine\ORM as Doctrine;
+use Thorr\Persistence\Doctrine\EntityManagerAwareInterface;
 use Thorr\Persistence\Repository\RepositoryInterface;
 use Zend\EventManager\EventManagerAwareInterface;
 

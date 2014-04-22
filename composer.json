@@ -1,0 +1,36 @@
+{
+    "name": "stefanotorresi/thorr-persistence",
+    "description": "A collection of helper classes for Repository pattern implementation based on Doctrine ORM",
+    "type" : "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Stefano Torresi",
+            "email": "stefano@torresi.pro"
+        }
+    ],
+    "require": {
+
+    },
+    "require-dev": {
+        "doctrine/orm": "2.*",
+        "zendframework/zend-eventmanager": "2.*",
+        "zendframework/zend-servicemanager": "2.*"
+    },
+    "suggest": {
+        "doctrine/orm" : "required to use Doctrine related classes",
+        "zendframework/zend-eventmanager": "required to use Doctrine related classes",
+        "zendframework/zend-servicemanager": "required to use initializers"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.x-dev"
+        }
+    },
+    "autoload" : {
+        "psr-4": {
+            "Thorr\\Persistence\\": "src/",
+            "Thorr\\Persistence\\Test\\": "tests/"
+        }
+    }
+}
