@@ -5,7 +5,7 @@
  * ************************************************
  */
 
-namespace Thorr\Persistence\Test\Doctrine;
+namespace Thorr\Persistence\Test\Doctrine\Repository;
 
 use Thorr\Persistence\Repository\RepositoryEvent;
 use Thorr\Persistence\Doctrine\Repository\EntityRepository;

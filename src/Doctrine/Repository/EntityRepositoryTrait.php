@@ -10,7 +10,6 @@ namespace Thorr\Persistence\Doctrine\Repository;
 use Thorr\Persistence\Repository\RepositoryEvent as Event;
 use Doctrine\ORM as Doctrine;
 use Zend\EventManager\EventManagerAwareTrait;
-use Zend\Paginator\Paginator;
 
 /**
  * This is intended to be used on Doctrine\EntityRepository subclasses
