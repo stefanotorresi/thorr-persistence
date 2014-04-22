@@ -9,9 +9,6 @@
             "email": "stefano@torresi.pro"
         }
     ],
-    "require": {
-
-    },
     "require-dev": {
         "doctrine/orm": "2.*",
         "zendframework/zend-eventmanager": "2.*",
