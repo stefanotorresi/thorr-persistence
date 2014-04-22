@@ -15,12 +15,15 @@
     "require-dev": {
         "doctrine/orm": "2.*",
         "zendframework/zend-eventmanager": "2.*",
-        "zendframework/zend-servicemanager": "2.*"
+        "zendframework/zend-servicemanager": "2.*",
+        "zendframework/zend-modulemanager": "2.*"
     },
     "suggest": {
         "doctrine/orm" : "required to use Doctrine related classes",
         "zendframework/zend-eventmanager": "required to use Doctrine related classes",
-        "zendframework/zend-servicemanager": "required to use initializers"
+        "zendframework/zend-servicemanager": "required to use initializers",
+        "zendframework/zend-modulemanager": "required to load the library as a ZF2 module",
+        "doctrine/doctrine-orm-module" : "required to load AbstractEntity doctrine mapping"
     },
     "extra": {
         "branch-alias": {
