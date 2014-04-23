@@ -7,8 +7,16 @@
 
 namespace Thorr\Persistence\Entity;
 
-abstract class AbstractEntity implements IdProviderInterface
+interface IdProviderInterface
 {
-    use FqcnProviderTrait;
-    use IdProviderTrait;
+    /**
+     * @return mixed
+     */
+    public function getId();
+
+    /**
+     * @param  mixed $id
+     * @return self
+     */
+    public function setId($id);
 }
