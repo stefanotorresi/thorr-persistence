@@ -7,9 +7,8 @@
 
 namespace Thorr\Persistence\Doctrine\Repository;
 
-use Doctrine\ORM as Doctrine;
+use Doctrine\ORM;
 use Thorr\Persistence\Doctrine\EntityManagerAwareInterface;
-use Thorr\Persistence\Repository\RepositoryInterface;
 use Zend\EventManager\EventManagerAwareInterface;
 
 /**
@@ -19,15 +18,15 @@ use Zend\EventManager\EventManagerAwareInterface;
  * Class EntityMapper
  * @package Thorr\Persistence\Doctrine
  */
-class EntityRepository extends Doctrine\EntityRepository implements
-    RepositoryInterface,
+class EntityRepository extends ORM\EntityRepository implements
+    ORMRepositoryInterface,
     EventManagerAwareInterface,
     EntityManagerAwareInterface
 {
     use EntityRepositoryTrait;
 
     /**
-     * @return Doctrine\EntityManager
+     * @return ORM\EntityManager
      */
     public function getEntityManager()
     {

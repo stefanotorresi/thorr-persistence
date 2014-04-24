@@ -17,19 +17,12 @@ interface RepositoryInterface
 
     /**
      * @param  mixed $entity
-     * @param  bool  $flush
      * @return mixed
      */
-    public function save($entity, $flush = true);
-
-    /**
-     * @param mixed $entity
-     * @param bool  $flush
-     */
-    public function remove($entity, $flush = true);
+    public function save($entity);
 
     /**
      * @param mixed $entity
      */
-    public function flush($entity = null);
+    public function remove($entity);
 }
