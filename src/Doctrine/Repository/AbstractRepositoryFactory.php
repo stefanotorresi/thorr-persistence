@@ -52,14 +52,6 @@ class AbstractRepositoryFactory implements AbstractFactoryInterface
         /** @var ObjectManager $objectManager */
         $objectManager = $serviceManager->get('Doctrine\ORM\EntityManager');
 
-        if (! $objectManager->getMetadataFactory()->isTransient($entityClass)) {
-            throw new InvalidServiceNameException(sprintf(
-                '"%s" is not a valid entity class for requested repository "%s"',
-                $entityClass,
-                $requestedName
-            ));
-        }
-
         return $objectManager->getRepository($entityClass);
     }
 }
