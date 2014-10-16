@@ -5,15 +5,13 @@
  * ************************************************
  */
 
-namespace Thorr\Persistence\Entity;
+namespace Thorr\Persistence\DataMapper;
 
-trait FqcnProviderTrait
+interface EntityRemoverInterface
 {
     /**
-     * @return string
+     * @param  object $entity
+     * @return bool   returns true on success
      */
-    public static function fqcn()
-    {
-        return get_called_class();
-    }
+    public function remove($entity);
 }

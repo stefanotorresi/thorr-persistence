@@ -5,30 +5,30 @@
  * ************************************************
  */
 
-namespace Thorr\Persistence\Repository\Manager;
+namespace Thorr\Persistence\DataMapper\Manager;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class RepositoryManagerFactory implements FactoryInterface
+class DataMapperManagerFactory implements FactoryInterface
 {
     /**
      * Create service
      *
      * @param  ServiceLocatorInterface $serviceLocator
-     * @return RepositoryManager
+     * @return DataMapperManager
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $repositoryManager = new RepositoryManager();
-        $repositoryManager->setServiceLocator($serviceLocator);
+        $dataMapperManager = new DataMapperManager();
+        $dataMapperManager->setServiceLocator($serviceLocator);
 
         $configuration = $serviceLocator->get('Config');
 
         if (isset($configuration['di']) && $serviceLocator->has('Di')) {
-            $repositoryManager->addAbstractFactory($serviceLocator->get('DiAbstractServiceFactory'));
+            $dataMapperManager->addAbstractFactory($serviceLocator->get('DiAbstractServiceFactory'));
         }
 
-        return $repositoryManager;
+        return $dataMapperManager;
     }
 }

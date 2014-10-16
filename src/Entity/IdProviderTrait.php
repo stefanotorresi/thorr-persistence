@@ -20,13 +20,10 @@ trait IdProviderTrait
     }
 
     /**
-     * @param  mixed $id
-     * @return self
+     * @param mixed $id
      */
     public function setId($id)
     {
         $this->id = $id;
-
-        return $this;
     }
 }

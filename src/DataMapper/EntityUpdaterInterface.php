@@ -5,17 +5,13 @@
  * ************************************************
  */
 
-namespace Thorr\Persistence\Entity;
+namespace Thorr\Persistence\DataMapper;
 
-interface IdProviderInterface
+interface EntityUpdaterInterface
 {
     /**
-     * @return mixed
+     * @param  object $entity
+     * @return bool   returns true on success
      */
-    public function getId();
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id);
+    public function update($entity);
 }

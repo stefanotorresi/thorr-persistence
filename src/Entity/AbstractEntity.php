@@ -9,6 +9,5 @@ namespace Thorr\Persistence\Entity;
 
 abstract class AbstractEntity implements IdProviderInterface
 {
-    use FqcnProviderTrait;
     use IdProviderTrait;
 }

@@ -1,4 +1,4 @@
-/vendor/
+/vendor
+/tests/_coverage
 composer.lock
 phpunit.xml
-tests/_coverage

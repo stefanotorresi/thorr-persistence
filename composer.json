@@ -1,6 +1,6 @@
 {
     "name": "stefanotorresi/thorr-persistence",
-    "description": "A collection of helper classes for Repository pattern implementation based on Doctrine ORM",
+    "description": "Agnostic interfaces for a DataMapper implementation through vendor specific adapters",
     "type" : "library",
     "license": "MIT",
     "authors": [
@@ -9,18 +9,19 @@
             "email": "stefano@torresi.pro"
         }
     ],
+    "require": {
+        "php": "~5.5"
+    },
     "require-dev": {
-        "doctrine/orm": "2.*",
-        "zendframework/zend-eventmanager": "2.*",
-        "zendframework/zend-servicemanager": "2.*",
-        "zendframework/zend-modulemanager": "2.*"
+        "zendframework/zend-eventmanager": "~2.3",
+        "zendframework/zend-servicemanager": "~2.3",
+        "zendframework/zend-di": "~2.3",
+        "zendframework/zend-modulemanager": "~2.3"
     },
     "suggest": {
-        "doctrine/orm" : "required to use Doctrine related classes",
-        "zendframework/zend-eventmanager": "required to use Doctrine related classes",
-        "zendframework/zend-servicemanager": "required to use initializers",
-        "zendframework/zend-modulemanager": "required to load the library as a ZF2 module",
-        "doctrine/doctrine-orm-module" : "required to load AbstractEntity doctrine mapping"
+        "zendframework/zend-eventmanager": "required to use the EventManagerAware decorator",
+        "zendframework/zend-servicemanager": "required to use DataMapperManager",
+        "zendframework/zend-modulemanager": "required to load the library as a ZF2 module"
     },
     "extra": {
         "branch-alias": {
@@ -28,6 +29,9 @@
         }
     },
     "autoload" : {
+        "classmap": [
+            "Module.php"
+        ],
         "psr-4": {
             "Thorr\\Persistence\\": "src/",
             "Thorr\\Persistence\\Test\\": "tests/"
