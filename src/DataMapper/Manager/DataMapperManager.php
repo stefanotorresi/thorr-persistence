@@ -7,12 +7,12 @@
 
 namespace Thorr\Persistence\DataMapper\Manager;
 
-use Thorr\Persistence\DataMapper\AbstractDataMapper;
+use Thorr\Persistence\DataMapper\DataMapperInterface;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\Exception;
 
 /**
- * @method AbstractDataMapper get($name)
+ * @method DataMapperInterface get($name)
  */
 class DataMapperManager extends AbstractPluginManager
 {
@@ -28,7 +28,7 @@ class DataMapperManager extends AbstractPluginManager
      */
     public function validatePlugin($plugin)
     {
-        if ($plugin instanceof AbstractDataMapper) {
+        if ($plugin instanceof DataMapperInterface) {
             // we're okay
             return;
         }

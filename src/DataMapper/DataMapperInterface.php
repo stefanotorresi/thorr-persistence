@@ -7,10 +7,11 @@
 
 namespace Thorr\Persistence\DataMapper;
 
-abstract class AbstractDataMapper implements
+interface DataMapperInterface extends
     EntityFinderInterface,
     EntityRemoverInterface,
     EntitySaverInterface,
     EntityUpdaterInterface
 {
+
 }
