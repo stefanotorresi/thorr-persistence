@@ -22,12 +22,12 @@ tools:
     php_mess_detector:
         enabled: true
         filter:
-            paths: ["config/*", "src/*"]
+            paths: ["src/*"]
     php_pdepend:
         enabled: true
         excluded_dirs: ["tests", "vendor"]
     php_analyzer:
         enabled: true
         filter:
-            paths: ["config/*", "src/*", "tests/*"]
+            paths: ["src/*", "tests/*"]
     sensiolabs_security_checker: true

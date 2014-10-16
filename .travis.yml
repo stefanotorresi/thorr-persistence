@@ -1,7 +1,8 @@
 language: php
 php:
- - "5.4"
  - "5.5"
+ - "5.6"
+ - "hhvm"
 
 before_install:
  - composer self-update
@@ -11,7 +12,6 @@ before_install:
 script:
  - php php-cs-fixer.phar fix -v --dry-run --level=all ./src
  - php php-cs-fixer.phar fix -v --dry-run --level=all ./tests
- - php php-cs-fixer.phar fix -v --dry-run --level=all ./config
  - phpunit --coverage-clover ./tests/_coverage/clover.xml
 
 after_script:
