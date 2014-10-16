@@ -7,6 +7,6 @@ Thorr\Persistence
 [![Code Coverage](https://scrutinizer-ci.com/g/stefanotorresi/thorr-persistence/badges/coverage.png?s=333719d623e594189d997672ca4c1852cf665a67)](https://scrutinizer-ci.com/g/stefanotorresi/thorr-persistence/)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/stefanotorresi/thorr-persistence/badges/quality-score.png?s=1a350e9ee86db7b9ec2d006675405292123f20cb)](https://scrutinizer-ci.com/g/stefanotorresi/thorr-persistence/)
 
-A collection of helper classes for Repository pattern implementation based on [Doctrine ORM][doctrine-orm]
+Agnostic interfaces for a DataMapper implementation through vendor specific adapters (e.g. for [Doctrine ORM][doctrine-orm])
 
 [doctrine-orm]: http://www.doctrine-project.org
