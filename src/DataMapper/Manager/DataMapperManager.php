@@ -5,13 +5,16 @@
  * ************************************************
  */
 
-namespace Thorr\Persistence\Repository\Manager;
+namespace Thorr\Persistence\DataMapper\Manager;
 
-use Thorr\Persistence\Repository\RepositoryInterface;
+use Thorr\Persistence\DataMapper\AbstractDataMapper;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\Exception;
 
-class RepositoryManager extends AbstractPluginManager
+/**
+ * @method AbstractDataMapper get($name)
+ */
+class DataMapperManager extends AbstractPluginManager
 {
     /**
      * Validate the plugin
@@ -25,7 +28,7 @@ class RepositoryManager extends AbstractPluginManager
      */
     public function validatePlugin($plugin)
     {
-        if ($plugin instanceof RepositoryInterface) {
+        if ($plugin instanceof AbstractDataMapper) {
             // we're okay
             return;
         }

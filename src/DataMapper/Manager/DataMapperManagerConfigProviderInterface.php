@@ -5,14 +5,14 @@
  * ************************************************
  */
 
-namespace Thorr\Persistence\Repository\Manager;
+namespace Thorr\Persistence\DataMapper\Manager;
 
-interface RepositoryManagerConfigProviderInterface
+interface DataMapperManagerConfigProviderInterface
 {
     /**
-     * RepositoryManager configuration
+     * DataMapperManager configuration
      *
      * @return array
      */
-    public function getRepositoryManagerConfig();
+    public function getDataMapperManagerConfig();
 }
