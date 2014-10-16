@@ -21,12 +21,9 @@ trait IdProviderTrait
 
     /**
      * @param  mixed $id
-     * @return self
      */
     public function setId($id)
     {
         $this->id = $id;
-
-        return $this;
     }
 }
