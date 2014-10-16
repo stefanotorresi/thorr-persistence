@@ -35,8 +35,8 @@ class DataMapperManagerFactoryTest extends TestCase
 
         $serviceLocator->expects($this->atLeastOnce())
             ->method('get')
-            ->willReturnCallback(function($arg) use ($diAbstractFactory) {
-                switch($arg) {
+            ->willReturnCallback(function ($arg) use ($diAbstractFactory) {
+                switch ($arg) {
                     case 'Config': return [ 'di' => [] ];
                     case 'DiAbstractServiceFactory': return $diAbstractFactory;
                 }
@@ -50,6 +50,5 @@ class DataMapperManagerFactoryTest extends TestCase
         $dataMapperManager = $factory->createService($serviceLocator);
 
         $this->assertAttributeContains($diAbstractFactory, 'abstractFactories', $dataMapperManager);
-
     }
 }

@@ -13,5 +13,4 @@ abstract class AbstractDataMapper implements
     EntitySaverInterface,
     EntityUpdaterInterface
 {
-
 }

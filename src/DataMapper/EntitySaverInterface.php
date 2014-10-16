@@ -14,7 +14,7 @@ interface EntitySaverInterface
 {
     /**
      * @param  object $entity
-     * @return bool             returns true on success
+     * @return bool   returns true on success
      */
     public function save($entity);
 }

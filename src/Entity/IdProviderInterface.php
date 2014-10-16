@@ -15,7 +15,7 @@ interface IdProviderInterface
     public function getId();
 
     /**
-     * @param  mixed $id
+     * @param mixed $id
      */
     public function setId($id);
 }
