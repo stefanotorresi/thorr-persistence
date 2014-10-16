@@ -7,6 +7,9 @@
 
 namespace Thorr\Persistence\Entity;
 
+/**
+ * Polyfill for PHP 5.5 ::class
+ */
 trait FqcnProviderTrait
 {
     /**
