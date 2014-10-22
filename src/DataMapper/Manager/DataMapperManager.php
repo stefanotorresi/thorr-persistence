@@ -34,9 +34,9 @@ class DataMapperManager extends AbstractPluginManager
         }
 
         throw new Exception\RuntimeException(sprintf(
-            'Plugin of type %s is invalid; must implement %s\RepositoryInterface',
+            'Plugin of type %s is invalid; must implement %s',
             (is_object($plugin) ? get_class($plugin) : gettype($plugin)),
-            __NAMESPACE__
+            DataMapperInterface::class
         ));
     }
 }
