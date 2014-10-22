@@ -10,8 +10,8 @@ namespace Thorr\Persistence\DataMapper;
 interface EntityFinderInterface
 {
     /**
-     * @param  $id
+     * @param  mixed       $id
      * @return object|null
      */
-    public function find($id);
+    public function findById($id);
 }

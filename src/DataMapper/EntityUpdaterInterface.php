@@ -10,8 +10,7 @@ namespace Thorr\Persistence\DataMapper;
 interface EntityUpdaterInterface
 {
     /**
-     * @param  object $entity
-     * @return bool   returns true on success
+     * @param object $entity
      */
     public function update($entity);
 }

@@ -13,8 +13,7 @@ namespace Thorr\Persistence\DataMapper;
 interface EntitySaverInterface
 {
     /**
-     * @param  object $entity
-     * @return bool   returns true on success
+     * @param object $entity
      */
     public function save($entity);
 }

@@ -10,8 +10,12 @@ namespace Thorr\Persistence\DataMapper;
 interface EntityRemoverInterface
 {
     /**
-     * @param  object $entity
-     * @return bool   returns true on success
+     * @param object $entity
      */
     public function remove($entity);
+
+    /**
+     * @param mixed $id
+     */
+    public function removeById($id);
 }
