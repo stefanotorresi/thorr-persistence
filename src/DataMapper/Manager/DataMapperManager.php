@@ -39,4 +39,23 @@ class DataMapperManager extends AbstractPluginManager
             DataMapperInterface::class
         ));
     }
+
+    /**
+     * @param string $entityClass
+     * @return DataMapperInterface
+     */
+    public function getDataMapperForEntity($entityClass)
+    {
+        $config = $this->get('config');
+
+        if (! isset($config['thorr_persistence_doctrine']['data_mappers'][$entityClass])) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                "Could not find data mapper service name for entity class '%s'", $entityClass
+            ));
+        }
+
+        $dataMapperServiceName = $config['thorr_persistence_doctrine']['data_mappers'][$entityClass];
+
+        return $this->get($dataMapperServiceName);
+    }
 }
