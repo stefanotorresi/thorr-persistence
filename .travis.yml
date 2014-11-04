@@ -12,8 +12,8 @@ before_install:
 script:
  - php php-cs-fixer.phar fix -v --dry-run --level=all ./src
  - php php-cs-fixer.phar fix -v --dry-run --level=all ./tests
- - phpunit --coverage-clover ./tests/_coverage/clover.xml
+ - phpunit --coverage-clover ./build/coverage/clover.xml
 
 after_script:
  - wget https://scrutinizer-ci.com/ocular.phar
- - php ocular.phar code-coverage:upload --format=php-clover ./tests/_coverage/clover.xml
+ - php ocular.phar code-coverage:upload --format=php-clover ./build/coverage/clover.xml
