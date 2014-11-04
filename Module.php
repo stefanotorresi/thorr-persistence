@@ -28,9 +28,9 @@ class Module implements
         $serviceListener = $serviceManager->get('ServiceListener');
 
         $serviceListener->addServiceManager(
-            'Thorr\Persistence\DataMapper\Manager\DataMapperManager',
-            'data_mapper_manager',
-            'Thorr\Persistence\DataMapper\Manager\DataMapperManagerConfigProviderInterface',
+            DataMapper\Manager\DataMapperManager::class,
+            'thorr_persistence_dmm',
+            DataMapper\Manager\DataMapperManagerConfigProviderInterface::class,
             'getDataMapperManagerConfig'
         );
     }
@@ -45,11 +45,10 @@ class Module implements
     {
         return [
             'factories' => [
-                'Thorr\Persistence\DataMapper\Manager\DataMapperManager' =>
-                    'Thorr\Persistence\DataMapper\Manager\DataMapperManagerFactory'
+                DataMapper\Manager\DataMapperManager::class => DataMapper\Manager\DataMapperManagerFactory::class
             ],
             'aliases' => [
-                'DataMapperManager' => 'Thorr\Persistence\DataMapper\Manager\DataMapperManager'
+                'DataMapperManager' => DataMapper\Manager\DataMapperManager::class
             ]
         ];
     }
