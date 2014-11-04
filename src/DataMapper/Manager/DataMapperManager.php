@@ -19,9 +19,6 @@ class DataMapperManager extends AbstractPluginManager
     /**
      * Validate the plugin
      *
-     * Checks that the filter loaded is either a valid callback or an instance
-     * of FilterInterface.
-     *
      * @param  mixed                      $plugin
      * @return void
      * @throws Exception\RuntimeException if invalid
@@ -46,15 +43,15 @@ class DataMapperManager extends AbstractPluginManager
      */
     public function getDataMapperForEntity($entityClass)
     {
-        $config = $this->get('config');
+        $config = $this->getServiceLocator()->get('config');
 
-        if (! isset($config['thorr_persistence_doctrine']['data_mappers'][$entityClass])) {
+        if (! isset($config['thorr_persistence']['data_mappers'][$entityClass])) {
             throw new Exception\InvalidArgumentException(sprintf(
                 "Could not find data mapper service name for entity class '%s'", $entityClass
             ));
         }
 
-        $dataMapperServiceName = $config['thorr_persistence_doctrine']['data_mappers'][$entityClass];
+        $dataMapperServiceName = $config['thorr_persistence']['data_mappers'][$entityClass];
 
         return $this->get($dataMapperServiceName);
     }
