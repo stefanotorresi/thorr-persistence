@@ -13,5 +13,4 @@ interface DataMapperInterface extends
     EntitySaverInterface,
     EntityUpdaterInterface
 {
-
 }
