@@ -47,7 +47,8 @@ class DataMapperManager extends AbstractPluginManager
 
         if (! isset($config['thorr_persistence']['data_mappers'][$entityClass])) {
             throw new Exception\InvalidArgumentException(sprintf(
-                "Could not find data mapper service name for entity class '%s'", $entityClass
+                "Could not find data mapper service name for entity class '%s'",
+                $entityClass
             ));
         }
 
