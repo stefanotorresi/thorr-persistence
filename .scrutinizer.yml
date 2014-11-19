@@ -10,10 +10,10 @@ tools:
     php_cpd:
         enabled: true
         excluded_dirs: ["tests", "vendor"]
-    php_cs_fixer:
+    php_code_sniffer:
         enabled: true
         config:
-            level: all
+            standard: PSR2
         filter:
             paths: ["config/*", "src/*", "tests/*"]
     php_loc:
