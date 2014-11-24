@@ -44,7 +44,7 @@ class DataMapperManagerTest extends TestCase
                 // $dataMapper
                 new \stdClass(),
                 // $expectedException
-                [RuntimeException::class, 'Invalid DataMapper type']
+                [RuntimeException::class, 'Invalid DataMapper type'],
             ],
             [
                 // $dataMapper
@@ -54,9 +54,10 @@ class DataMapperManagerTest extends TestCase
             ],
             [
                 // $dataMapper
-                function(){
+                function () {
                     $mock = $this->getMock(DataMapperInterface::class);
                     $mock->expects($this->any())->method('getEntityClass')->willReturn('foo');
+
                     return $mock;
                 },
                 // $expectedException
@@ -68,7 +69,7 @@ class DataMapperManagerTest extends TestCase
     /**
      * @param array $config
      * @param $requestedDataMapperEntity
-     * @param bool $expectedException
+     * @param bool  $expectedException
      * @dataProvider configProvider
      */
     public function testGetDataMapperForEntity($config, $requestedDataMapperEntity, $expectedException)
@@ -131,11 +132,12 @@ class DataMapperManagerTest extends TestCase
                         'SomeEntityClass' => 'SomeDataMapperServiceName',
                     ],
                     'factories' => [
-                        'SomeDataMapperServiceName' => function() {
+                        'SomeDataMapperServiceName' => function () {
                             $mock = $this->getMock(DataMapperInterface::class);
                             $mock->expects($this->any())->method('getEntityClass')->willReturn('SomeEntityClass');
+
                             return $mock;
-                        }
+                        },
                     ]
                 ],
 
@@ -167,11 +169,12 @@ class DataMapperManagerTest extends TestCase
                         'AnotherEntityClass'    => 'SomeDataMapperServiceName',
                     ],
                     'factories' => [
-                        'SomeDataMapperServiceName' => function() {
+                        'SomeDataMapperServiceName' => function () {
                             $mock = $this->getMock(DataMapperInterface::class);
                             $mock->expects($this->any())->method('getEntityClass')->willReturn('AnotherEntityClass');
+
                             return $mock;
-                        }
+                        },
                     ],
                 ],
 
@@ -189,11 +192,12 @@ class DataMapperManagerTest extends TestCase
                         'AnotherEntityClass'    => 'SomeDataMapperServiceName',
                     ],
                     'factories' => [
-                        'SomeDataMapperServiceName' => function() {
+                        'SomeDataMapperServiceName' => function () {
                             $mock = $this->getMock(DataMapperInterface::class);
                             $mock->expects($this->any())->method('getEntityClass')->willReturn('AnotherEntityClass');
+
                             return $mock;
-                        }
+                        },
                     ],
                 ],
 
