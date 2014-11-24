@@ -10,34 +10,70 @@ namespace Thorr\Persistence\Test\DataMapper\Manager;
 use PHPUnit_Framework_TestCase as TestCase;
 use Thorr\Persistence\DataMapper\DataMapperInterface;
 use Thorr\Persistence\DataMapper\Manager\DataMapperManager;
+use Thorr\Persistence\DataMapper\Manager\DataMapperManagerConfig;
 use Zend\ServiceManager\Exception\InvalidArgumentException;
 use Zend\ServiceManager\Exception\RuntimeException;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 class DataMapperManagerTest extends TestCase
 {
-    public function testValidatePlugin()
+    /**
+     * @param mixed $dataMapper
+     * @param array $expectedException
+     * @dataProvider validatePluginProvider
+     */
+    public function testValidatePlugin($dataMapper, $expectedException)
     {
         $dataMapperManager = new DataMapperManager();
 
-        $dataMapper        = $this->getMock(DataMapperInterface::class);
-        $notADataMapper    = new \stdClass();
+        if (is_callable($dataMapper)) {
+            $dataMapper = $dataMapper();
+        }
+
+        if ($expectedException) {
+            $this->setExpectedException($expectedException[0], $expectedException[1]);
+        }
 
         $dataMapperManager->validatePlugin($dataMapper);
+    }
 
-        $this->setExpectedException(RuntimeException::class);
-
-        $dataMapperManager->validatePlugin($notADataMapper);
+    public function validatePluginProvider()
+    {
+        return [
+            [
+                // $dataMapper
+                new \stdClass(),
+                // $expectedException
+                [RuntimeException::class, 'Invalid DataMapper type']
+            ],
+            [
+                // $dataMapper
+                $this->getMock(DataMapperInterface::class),
+                // $expectedException
+                [RuntimeException::class, 'getEntityClass() must return a non empty value']
+            ],
+            [
+                // $dataMapper
+                function(){
+                    $mock = $this->getMock(DataMapperInterface::class);
+                    $mock->expects($this->any())->method('getEntityClass')->willReturn('foo');
+                    return $mock;
+                },
+                // $expectedException
+                null
+            ],
+        ];
     }
 
     /**
-     * @dataProvider configProvider
      * @param array $config
-     * @param bool  $shouldThrowException
+     * @param $requestedDataMapperEntity
+     * @param bool $expectedException
+     * @dataProvider configProvider
      */
-    public function testGetDataMapperForEntity($config, $shouldThrowException)
+    public function testGetDataMapperForEntity($config, $requestedDataMapperEntity, $expectedException)
     {
-        $dataMapperManager = new DataMapperManager();
+        $dataMapperManager = new DataMapperManager(new DataMapperManagerConfig($config));
 
         $serviceLocator = $this->getMock(ServiceLocatorInterface::class);
         $serviceLocator->expects($this->any())
@@ -45,17 +81,17 @@ class DataMapperManagerTest extends TestCase
                         ->with('config')
                         ->willReturn($config);
 
-        $dataMapper = $this->getMock(DataMapperInterface::class);
-
         $dataMapperManager->setServiceLocator($serviceLocator);
-        $dataMapperManager->setService('SomeDataMapper', $dataMapper);
 
-        if ($shouldThrowException) {
-            $this->setExpectedException(InvalidArgumentException::class, 'SomeEntityClass');
-            $dataMapperManager->getDataMapperForEntity('SomeEntityClass');
-        } else {
-            $this->assertSame($dataMapper, $dataMapperManager->getDataMapperForEntity('SomeEntityClass'));
+        if ($expectedException) {
+            $this->setExpectedException($expectedException);
+            $dataMapperManager->getDataMapperForEntity($requestedDataMapperEntity);
+
+            return;
         }
+
+        $dataMapper = $dataMapperManager->getDataMapperForEntity($requestedDataMapperEntity);
+        $this->assertInstanceOf(DataMapperInterface::class, $dataMapper);
     }
 
     /**
@@ -70,54 +106,102 @@ class DataMapperManagerTest extends TestCase
                 // $config
                 [],
 
-                // $shouldTrowException
-                true,
+                // $requestedDataMapperEntity
+                'anything',
+
+                // $expectedException
+                InvalidArgumentException::class,
             ],
             [
                 // $config
                 [
-                    'thorr_persistence' => []
+                    'entity_data_mapper_map' => [],
                 ],
 
-                // $shouldTrowException
-                true,
+                // $requestedDataMapperEntity
+                'anything',
+
+                // $expectedException
+                InvalidArgumentException::class
             ],
             [
                 // $config
                 [
-                    'thorr_persistence' => [
-                        'data_mappers' => [],
+                    'entity_data_mapper_map' => [
+                        'SomeEntityClass' => 'SomeDataMapperServiceName',
+                    ],
+                    'factories' => [
+                        'SomeDataMapperServiceName' => function() {
+                            $mock = $this->getMock(DataMapperInterface::class);
+                            $mock->expects($this->any())->method('getEntityClass')->willReturn('SomeEntityClass');
+                            return $mock;
+                        }
                     ]
                 ],
 
-                // $shouldTrowException
-                true
+                // $requestedDataMapperEntity
+                'SomeEntityClass',
+
+                // $expectedException
+                null
             ],
             [
                 // $config
                 [
-                    'thorr_persistence' => [
-                        'data_mappers' => [
-                            'SomeEntityClass' => 'SomeDataMapper',
-                        ],
-                    ]
+                    'entity_data_mapper_map' => [
+                        'AnotherEntityClass'    => 'SomeDataMapperServiceName',
+                    ],
                 ],
 
-                // $shouldTrowException
-                false
+                // $requestedDataMapperEntity
+                'SomeEntityClass',
+
+                // $expectedException
+                InvalidArgumentException::class
             ],
             [
                 // $config
                 [
-                    'thorr_persistence' => [
-                        'data_mappers' => [
-                            'AnotherEntityClass' => 'SomeDataMapper',
-                        ],
-                    ]
+                    'entity_data_mapper_map' => [
+                        'SomeEntityClass'       => 'SomeDataMapperServiceName',
+                        'AnotherEntityClass'    => 'SomeDataMapperServiceName',
+                    ],
+                    'factories' => [
+                        'SomeDataMapperServiceName' => function() {
+                            $mock = $this->getMock(DataMapperInterface::class);
+                            $mock->expects($this->any())->method('getEntityClass')->willReturn('AnotherEntityClass');
+                            return $mock;
+                        }
+                    ],
                 ],
 
-                // $shouldTrowException
-                true
+                // $requestedDataMapperEntity
+                'SomeEntityClass',
+
+                // $expectedException
+                RuntimeException::class
+            ],
+            [
+                // $config
+                [
+                    'entity_data_mapper_map' => [
+                        'SomeEntityClass'       => 'SomeDataMapperServiceName',
+                        'AnotherEntityClass'    => 'SomeDataMapperServiceName',
+                    ],
+                    'factories' => [
+                        'SomeDataMapperServiceName' => function() {
+                            $mock = $this->getMock(DataMapperInterface::class);
+                            $mock->expects($this->any())->method('getEntityClass')->willReturn('AnotherEntityClass');
+                            return $mock;
+                        }
+                    ],
+                ],
+
+                // $requestedDataMapperEntity
+                'AnotherEntityClass',
+
+                // $expectedException
+                null
             ],
         ];
     }

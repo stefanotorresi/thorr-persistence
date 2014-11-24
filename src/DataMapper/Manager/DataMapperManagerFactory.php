@@ -20,12 +20,16 @@ class DataMapperManagerFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $dataMapperManager = new DataMapperManager();
+        $config = $serviceLocator->get('Config');
+
+        $dmmConfig = isset($config['thorr_persistence_dmm'])
+            ? new DataMapperManagerConfig($config['thorr_persistence_dmm'])
+            : null;
+
+        $dataMapperManager = new DataMapperManager($dmmConfig);
         $dataMapperManager->setServiceLocator($serviceLocator);
 
-        $configuration = $serviceLocator->get('Config');
-
-        if (isset($configuration['di']) && $serviceLocator->has('Di')) {
+        if (isset($config['di']) && $serviceLocator->has('Di')) {
             $dataMapperManager->addAbstractFactory($serviceLocator->get('DiAbstractServiceFactory'));
         }
 

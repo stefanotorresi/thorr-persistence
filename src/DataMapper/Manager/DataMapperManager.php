@@ -9,6 +9,7 @@ namespace Thorr\Persistence\DataMapper\Manager;
 
 use Thorr\Persistence\DataMapper\DataMapperInterface;
 use Zend\ServiceManager\AbstractPluginManager;
+use Zend\ServiceManager\ConfigInterface;
 use Zend\ServiceManager\Exception;
 
 /**
@@ -17,24 +18,40 @@ use Zend\ServiceManager\Exception;
 class DataMapperManager extends AbstractPluginManager
 {
     /**
-     * Validate the plugin
-     *
-     * @param  mixed                      $plugin
-     * @return void
-     * @throws Exception\RuntimeException if invalid
+     * @var array
      */
-    public function validatePlugin($plugin)
+    protected $entityDataMapperMap;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __construct(ConfigInterface $configuration = null)
     {
-        if ($plugin instanceof DataMapperInterface) {
-            // we're okay
-            return;
+        parent::__construct($configuration);
+
+        if ($configuration instanceof DataMapperManagerConfig) {
+            $this->entityDataMapperMap = $configuration->getEntityDataMapperMap();
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function validatePlugin($dataMapper)
+    {
+        if (! $dataMapper instanceof DataMapperInterface) {
+            throw new Exception\RuntimeException(sprintf(
+                'Invalid DataMapper type; expected %s, got %s',
+                DataMapperInterface::class,
+                (is_object($dataMapper) ? get_class($dataMapper) : gettype($dataMapper))
+            ));
         }
 
-        throw new Exception\RuntimeException(sprintf(
-            'Plugin of type %s is invalid; must implement %s',
-            (is_object($plugin) ? get_class($plugin) : gettype($plugin)),
-            DataMapperInterface::class
-        ));
+        if (empty($dataMapper->getEntityClass())) {
+            throw new Exception\RuntimeException(sprintf(
+                '%s::getEntityClass() must return a non empty value', get_class($dataMapper)
+            ));
+        }
     }
 
     /**
@@ -43,17 +60,26 @@ class DataMapperManager extends AbstractPluginManager
      */
     public function getDataMapperForEntity($entityClass)
     {
-        $config = $this->getServiceLocator()->get('config');
-
-        if (! isset($config['thorr_persistence']['data_mappers'][$entityClass])) {
+        if (! isset($this->entityDataMapperMap[$entityClass])) {
             throw new Exception\InvalidArgumentException(sprintf(
                 "Could not find data mapper service name for entity class '%s'",
                 $entityClass
             ));
         }
 
-        $dataMapperServiceName = $config['thorr_persistence']['data_mappers'][$entityClass];
+        $entityDMServiceName = $this->entityDataMapperMap[$entityClass];
 
-        return $this->get($dataMapperServiceName);
+        $dataMapper = $this->get($entityDMServiceName);
+
+        if ($dataMapper->getEntityClass() !== $entityClass) {
+            throw new Exception\RuntimeException(sprintf(
+                '"%s" entity class mismatch: expected "%s", got "%s"',
+                $entityDMServiceName,
+                $entityClass,
+                $dataMapper->getEntityClass()
+            ));
+        }
+
+        return $dataMapper;
     }
 }

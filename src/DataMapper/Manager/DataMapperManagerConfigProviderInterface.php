@@ -12,7 +12,7 @@ interface DataMapperManagerConfigProviderInterface
     /**
      * DataMapperManager configuration
      *
-     * @return array
+     * @return array|DataMapperManagerConfig
      */
     public function getDataMapperManagerConfig();
 }

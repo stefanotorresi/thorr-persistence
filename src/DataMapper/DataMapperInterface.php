@@ -13,4 +13,10 @@ interface DataMapperInterface extends
     EntitySaverInterface,
     EntityUpdaterInterface
 {
+    /**
+     * The entity class handled the adapter instance
+     *
+     * @return string
+     */
+    public function getEntityClass();
 }
