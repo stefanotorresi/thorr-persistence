@@ -12,7 +12,7 @@ use Rhumsaa\Uuid\Uuid;
 interface EntityFinderInterface
 {
     /**
-     * @param  Uuid|string  $uuid
+     * @param  Uuid|string $uuid
      * @return object|null
      */
     public function findByUuid($uuid);
