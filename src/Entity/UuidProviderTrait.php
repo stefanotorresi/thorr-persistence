@@ -11,6 +11,9 @@ use Rhumsaa\Uuid\Uuid;
 
 trait UuidProviderTrait
 {
+    /**
+     * @var Uuid
+     */
     protected $uuid;
 
     /**
@@ -19,13 +22,5 @@ trait UuidProviderTrait
     public function getUuid()
     {
         return $this->uuid;
-    }
-
-    /**
-     * @param Uuid $uuid
-     */
-    public function setUuid(Uuid $uuid)
-    {
-        $this->uuid = $uuid;
     }
 }

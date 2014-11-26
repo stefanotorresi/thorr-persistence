@@ -15,9 +15,4 @@ interface UuidProviderInterface
      * @return Uuid
      */
     public function getUuid();
-
-    /**
-     * @param Uuid $uuid
-     */
-    public function setUuid(Uuid $uuid);
 }
