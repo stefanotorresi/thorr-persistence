@@ -7,15 +7,17 @@
 
 namespace Thorr\Persistence\Entity;
 
-interface IdProviderInterface
+use Rhumsaa\Uuid\Uuid;
+
+interface UuidProviderInterface
 {
     /**
-     * @return mixed
+     * @return Uuid
      */
-    public function getId();
+    public function getUuid();
 
     /**
-     * @param mixed $id
+     * @param Uuid $uuid
      */
-    public function setId($id);
+    public function setUuid(Uuid $uuid);
 }

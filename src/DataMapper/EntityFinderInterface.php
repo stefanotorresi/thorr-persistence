@@ -7,11 +7,13 @@
 
 namespace Thorr\Persistence\DataMapper;
 
+use Rhumsaa\Uuid\Uuid;
+
 interface EntityFinderInterface
 {
     /**
-     * @param  mixed       $id
+     * @param  Uuid|string  $uuid
      * @return object|null
      */
-    public function findById($id);
+    public function findByUuid($uuid);
 }

@@ -7,7 +7,7 @@
 
 namespace Thorr\Persistence\Entity;
 
-abstract class AbstractEntity implements IdProviderInterface
+abstract class AbstractEntity implements UuidProviderInterface
 {
-    use IdProviderTrait;
+    use UuidProviderTrait;
 }

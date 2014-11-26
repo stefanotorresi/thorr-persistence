@@ -7,6 +7,8 @@
 
 namespace Thorr\Persistence\DataMapper;
 
+use Rhumsaa\Uuid\Uuid;
+
 interface EntityRemoverInterface
 {
     /**
@@ -15,7 +17,7 @@ interface EntityRemoverInterface
     public function remove($entity);
 
     /**
-     * @param mixed $id
+     * @param Uuid|string $uuid
      */
-    public function removeById($id);
+    public function removeByUuid($uuid);
 }

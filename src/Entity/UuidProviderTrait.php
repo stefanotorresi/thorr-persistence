@@ -7,23 +7,25 @@
 
 namespace Thorr\Persistence\Entity;
 
-trait IdProviderTrait
+use Rhumsaa\Uuid\Uuid;
+
+trait UuidProviderTrait
 {
-    protected $id;
+    protected $uuid;
 
     /**
-     * @return mixed
+     * @return Uuid
      */
-    public function getId()
+    public function getUuid()
     {
-        return $this->id;
+        return $this->uuid;
     }
 
     /**
-     * @param mixed $id
+     * @param Uuid $uuid
      */
-    public function setId($id)
+    public function setUuid(Uuid $uuid)
     {
-        $this->id = $id;
+        $this->uuid = $uuid;
     }
 }
