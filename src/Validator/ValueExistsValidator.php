@@ -7,7 +7,6 @@
 
 namespace Thorr\Persistence\Validator;
 
-
 class ValueExistsValidator extends AbstractEntityValidator
 {
     const ERROR_VALUE_NOT_EXISTS = 'valueNotExists';
