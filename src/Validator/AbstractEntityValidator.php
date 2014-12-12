@@ -117,18 +117,14 @@ abstract class AbstractEntityValidator extends AbstractValidator
 
     /**
      * @param $value
-     * @return mixed
+     * @return array
      */
     protected function findResult($value)
     {
         $result = $this->finder->{$this->findMethod}($value);
 
         if (! is_array($result)) {
-            throw new Exception\RuntimeException(sprintf(
-                "'%s::%s' must return an array",
-                get_class($this->finder),
-                $this->findMethod
-            ));
+            $result = [ $result ];
         }
 
         return $result;

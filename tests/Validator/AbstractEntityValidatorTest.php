@@ -78,7 +78,7 @@ class AbstractEntityValidatorTest extends TestCase
         $this->assertSame([$options['excluded']], $validator->getExcluded());
     }
 
-    public function testInvalidFinderResultThrowsException()
+    public function testNonArrayFinderResultIsReturnedInArray()
     {
         $finder = function ($val) { return $val; };
         /** @var AbstractEntityValidator $validator */
@@ -86,8 +86,7 @@ class AbstractEntityValidatorTest extends TestCase
 
         $method = new \ReflectionMethod($validator, 'findResult');
         $method->setAccessible(true);
-
-        $this->setExpectedException(Exception\RuntimeException::class, 'must return an array');
-        $method->invoke($validator, 'foo');
+        $this->assertEquals(['foo'], $method->invoke($validator, 'foo'));
+        $this->assertEquals(['foo'], $method->invoke($validator, ['foo']));
     }
 }
