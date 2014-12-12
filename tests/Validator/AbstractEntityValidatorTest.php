@@ -28,7 +28,7 @@ class AbstractEntityValidatorTest extends TestCase
         $validator = $this->getMockForAbstractClass(AbstractEntityValidator::class, $args);
 
         if (! $expectedException) {
-            foreach($args[0] as $property => $value) {
+            foreach ($args[0] as $property => $value) {
                 $property = str_replace('_', '', $property);
                 $this->assertSame($value, $validator->{'get'.$property}());
             }
@@ -40,14 +40,14 @@ class AbstractEntityValidatorTest extends TestCase
         return [
             [
                 [],
-                [ Exception\InvalidArgumentException::class, 'No finder provided']
+                [ Exception\InvalidArgumentException::class, 'No finder provided'],
             ],
             [
                 [ ['finder' => 'foo'] ],
                 [ Exception\InvalidArgumentException::class, 'Finder must be an object or a callable']
             ],
             [
-                [ ['finder' => function(){}] ],
+                [ ['finder' => function () {}] ],
                 null
             ],
             [
@@ -57,8 +57,8 @@ class AbstractEntityValidatorTest extends TestCase
             [
                 [ [
                       'finder' => $this->getMock(\stdClass::class, ['findBySomeProperty']),
-                      'find_method' => 'findBySomeProperty'
-                  ]
+                      'find_method' => 'findBySomeProperty',
+                  ],
                 ],
                 null
             ]
@@ -68,8 +68,8 @@ class AbstractEntityValidatorTest extends TestCase
     public function testExcludedSetter()
     {
         $options = [
-            'finder' => function(){},
-            'excluded' => 'foo'
+            'finder' => function () {},
+            'excluded' => 'foo',
         ];
 
         /** @var AbstractEntityValidator $validator */
@@ -80,7 +80,7 @@ class AbstractEntityValidatorTest extends TestCase
 
     public function testInvalidFinderResultThrowsException()
     {
-        $finder = function($val){ return $val; };
+        $finder = function ($val) { return $val; };
         /** @var AbstractEntityValidator $validator */
         $validator = $this->getMockForAbstractClass(AbstractEntityValidator::class, [['finder' => $finder]]);
 

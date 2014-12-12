@@ -14,7 +14,7 @@ class ValueNotExistsValidatorTest extends TestCase
 {
     public function testIsValid()
     {
-        $finder = function(){
+        $finder = function () {
             return [];
         };
 

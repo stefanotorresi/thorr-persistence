@@ -7,7 +7,6 @@
 
 namespace Thorr\Persistence\Validator;
 
-use Zend\Validator\Exception;
 
 class ValueExistsValidator extends AbstractEntityValidator
 {

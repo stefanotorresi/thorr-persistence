@@ -12,7 +12,6 @@ use Zend\Validator\Exception;
 
 abstract class AbstractEntityValidator extends AbstractValidator
 {
-
     /**
      * @var object
      */
@@ -29,7 +28,7 @@ abstract class AbstractEntityValidator extends AbstractValidator
     protected $excluded = [];
 
     /**
-     * @param array $options
+     * @param  array                              $options
      * @throws Exception\InvalidArgumentException
      */
     public function __construct(array $options = null)

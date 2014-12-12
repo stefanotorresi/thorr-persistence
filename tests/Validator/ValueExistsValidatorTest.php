@@ -14,7 +14,7 @@ class ValueExistsValidatorTest extends TestCase
 {
     public function testIsValid()
     {
-        $finder = function($value){
+        $finder = function ($value) {
             return [ $value ];
         };
 
@@ -25,7 +25,7 @@ class ValueExistsValidatorTest extends TestCase
 
     public function testIsNotValid()
     {
-        $finder = function(){
+        $finder = function () {
             return [];
         };
 
