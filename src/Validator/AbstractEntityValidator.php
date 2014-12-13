@@ -123,8 +123,12 @@ abstract class AbstractEntityValidator extends AbstractValidator
     {
         $result = $this->finder->{$this->findMethod}($value);
 
+        if ($result === null) {
+            return [];
+        }
+
         if (! is_array($result)) {
-            $result = [ $result ];
+            return [ $result ];
         }
 
         return $result;
