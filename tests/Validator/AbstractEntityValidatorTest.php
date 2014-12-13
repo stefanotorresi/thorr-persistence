@@ -88,7 +88,7 @@ class AbstractEntityValidatorTest extends TestCase
         $method->setAccessible(true);
         $this->assertEquals(['foo'], $method->invoke($validator, 'foo'));
         $this->assertEquals(['foo'], $method->invoke($validator, ['foo']));
-        $this->assertEquals([ false ], $method->invoke($validator, false )); // false is indeed a value
+        $this->assertEquals([ false ], $method->invoke($validator, false)); // false is indeed a value
         $this->assertEquals([], $method->invoke($validator, null));
         $this->assertEquals([], $method->invoke($validator, []));
     }
