@@ -16,6 +16,8 @@ $config = Symfony\CS\Config\Config::create()
     ->fixers([
         '-phpdoc_short_description',
         '-single_array_no_trailing_comma',
+        '-concat_without_spaces',
+        '-no_empty_lines_after_phpdocs',
         'concat_with_spaces',
         'align_equals',
         'align_double_arrow',
