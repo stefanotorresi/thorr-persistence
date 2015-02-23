@@ -15,7 +15,8 @@ class DataMapperManagerFactory implements FactoryInterface
     /**
      * Create service
      *
-     * @param  ServiceLocatorInterface $serviceLocator
+     * @param ServiceLocatorInterface $serviceLocator
+     *
      * @return DataMapperManager
      */
     public function createService(ServiceLocatorInterface $serviceLocator)

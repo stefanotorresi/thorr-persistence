@@ -50,7 +50,7 @@ class DataMapperManagerTest extends TestCase
                 // $dataMapper
                 $this->getMock(DataMapperInterface::class),
                 // $expectedException
-                [RuntimeException::class, 'getEntityClass() must return a non empty value']
+                [RuntimeException::class, 'getEntityClass() must return a non empty value'],
             ],
             [
                 // $dataMapper
@@ -61,7 +61,7 @@ class DataMapperManagerTest extends TestCase
                     return $mock;
                 },
                 // $expectedException
-                null
+                null,
             ],
         ];
     }
@@ -123,7 +123,7 @@ class DataMapperManagerTest extends TestCase
                 'anything',
 
                 // $expectedException
-                InvalidArgumentException::class
+                InvalidArgumentException::class,
             ],
             [
                 // $config
@@ -138,14 +138,14 @@ class DataMapperManagerTest extends TestCase
 
                             return $mock;
                         },
-                    ]
+                    ],
                 ],
 
                 // $requestedDataMapperEntity
                 'SomeEntityClass',
 
                 // $expectedException
-                null
+                null,
             ],
             [
                 // $config
@@ -159,7 +159,7 @@ class DataMapperManagerTest extends TestCase
                 'SomeEntityClass',
 
                 // $expectedException
-                InvalidArgumentException::class
+                InvalidArgumentException::class,
             ],
             [
                 // $config
@@ -182,7 +182,7 @@ class DataMapperManagerTest extends TestCase
                 'SomeEntityClass',
 
                 // $expectedException
-                RuntimeException::class
+                RuntimeException::class,
             ],
             [
                 // $config
@@ -205,7 +205,7 @@ class DataMapperManagerTest extends TestCase
                 'AnotherEntityClass',
 
                 // $expectedException
-                null
+                null,
             ],
         ];
     }

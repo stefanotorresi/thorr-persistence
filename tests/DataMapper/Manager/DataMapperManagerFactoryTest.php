@@ -27,8 +27,8 @@ class DataMapperManagerFactoryTest extends TestCase
 
     public function testDISupport()
     {
-        $factory        = new DataMapperManagerFactory();
-        $serviceLocator = $this->getMock(ServiceLocatorInterface::class);
+        $factory           = new DataMapperManagerFactory();
+        $serviceLocator    = $this->getMock(ServiceLocatorInterface::class);
         $diAbstractFactory = $this->getMockBuilder(DiAbstractServiceFactory::class)
                                   ->disableOriginalConstructor()
                                   ->getMock();

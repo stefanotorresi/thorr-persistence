@@ -55,7 +55,8 @@ class DataMapperManager extends AbstractPluginManager
     }
 
     /**
-     * @param  string              $entityClass
+     * @param string $entityClass
+     *
      * @return DataMapperInterface
      */
     public function getDataMapperForEntity($entityClass)

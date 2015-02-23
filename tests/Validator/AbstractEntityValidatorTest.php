@@ -30,7 +30,7 @@ class AbstractEntityValidatorTest extends TestCase
         if (! $expectedException) {
             foreach ($args[0] as $property => $value) {
                 $property = str_replace('_', '', $property);
-                $this->assertSame($value, $validator->{'get'.$property}());
+                $this->assertSame($value, $validator->{'get' . $property}());
             }
         }
     }
@@ -44,31 +44,31 @@ class AbstractEntityValidatorTest extends TestCase
             ],
             [
                 [ ['finder' => 'foo'] ],
-                [ Exception\InvalidArgumentException::class, 'Finder must be an object or a callable']
+                [ Exception\InvalidArgumentException::class, 'Finder must be an object or a callable'],
             ],
             [
                 [ ['finder' => function () {}] ],
-                null
+                null,
             ],
             [
                 [ ['finder' => new \stdClass()] ],
-                [ Exception\InvalidArgumentException::class, "'findByUuid' method not found in 'stdClass'"]
+                [ Exception\InvalidArgumentException::class, "'findByUuid' method not found in 'stdClass'"],
             ],
             [
                 [ [
-                      'finder' => $this->getMock(\stdClass::class, ['findBySomeProperty']),
+                      'finder'      => $this->getMock(\stdClass::class, ['findBySomeProperty']),
                       'find_method' => 'findBySomeProperty',
                   ],
                 ],
-                null
-            ]
+                null,
+            ],
         ];
     }
 
     public function testExcludedSetter()
     {
         $options = [
-            'finder' => function () {},
+            'finder'   => function () {},
             'excluded' => 'foo',
         ];
 

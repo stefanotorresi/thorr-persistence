@@ -10,7 +10,8 @@ namespace Thorr\Persistence\DataMapper;
 interface SluggableFinderInterface
 {
     /**
-     * @param  string $slug
+     * @param string $slug
+     *
      * @return object|null
      */
     public function findBySlug($slug);

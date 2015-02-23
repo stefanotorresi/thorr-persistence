@@ -14,9 +14,9 @@ class ValueNotExistsValidator extends AbstractEntityValidator
     /**
      * @var array Message templates
      */
-    protected $messageTemplates = array(
+    protected $messageTemplates = [
         self::ERROR_VALUE_EXISTS => "The value already exists",
-    );
+    ];
 
     /**
      * {@inheritdoc}

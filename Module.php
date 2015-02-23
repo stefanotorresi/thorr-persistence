@@ -45,11 +45,11 @@ class Module implements
     {
         return [
             'factories' => [
-                DataMapper\Manager\DataMapperManager::class => DataMapper\Manager\DataMapperManagerFactory::class
+                DataMapper\Manager\DataMapperManager::class => DataMapper\Manager\DataMapperManagerFactory::class,
             ],
             'aliases' => [
-                'DataMapperManager' => DataMapper\Manager\DataMapperManager::class
-            ]
+                'DataMapperManager' => DataMapper\Manager\DataMapperManager::class,
+            ],
         ];
     }
 }

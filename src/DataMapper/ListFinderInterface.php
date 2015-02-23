@@ -12,7 +12,8 @@ use Traversable;
 interface ListFinderInterface
 {
     /**
-     * @param  array $params
+     * @param array $params
+     *
      * @return array|Traversable
      */
     public function findAll($params);

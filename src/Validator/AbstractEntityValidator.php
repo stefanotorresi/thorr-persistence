@@ -28,7 +28,8 @@ abstract class AbstractEntityValidator extends AbstractValidator
     protected $excluded = [];
 
     /**
-     * @param  array                              $options
+     * @param array $options
+     *
      * @throws Exception\InvalidArgumentException
      */
     public function __construct(array $options = null)
@@ -117,6 +118,7 @@ abstract class AbstractEntityValidator extends AbstractValidator
 
     /**
      * @param $value
+     *
      * @return array
      */
     protected function findResult($value)

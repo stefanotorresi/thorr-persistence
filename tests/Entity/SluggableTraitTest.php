@@ -7,8 +7,8 @@
 
 namespace Thorr\Persistence\Test\Entity;
 
-use PHPUnit_Framework_TestCase as TestCase;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use PHPUnit_Framework_TestCase as TestCase;
 use Thorr\Persistence\Entity\SluggableTrait;
 
 class SluggableTraitTest extends TestCase
