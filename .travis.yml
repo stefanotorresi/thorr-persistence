@@ -7,11 +7,10 @@ php:
 before_install:
  - composer self-update
  - composer install --dev --prefer-source
- - wget http://cs.sensiolabs.org/get/php-cs-fixer.phar
 
 script:
- - php php-cs-fixer.phar fix -v --dry-run --level=all ./src
- - php php-cs-fixer.phar fix -v --dry-run --level=all ./tests
+ - ./vendor/bin/php-cs-fixer --version
+ - ./vendor/bin/php-cs-fixer fix -v --dry-run
  - phpunit --coverage-clover ./build/coverage/clover.xml
 
 after_script:
