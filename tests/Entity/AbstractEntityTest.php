@@ -20,7 +20,7 @@ class AbstractEntityTest extends TestCase
         /** @var AbstractEntity $entity */
         $entity = $this->getMockForAbstractClass(AbstractEntity::class, [ $uuid ]);
 
-        $this->assertSame($uuid, $entity->getUuid());
+        $this->assertEquals($uuid, $entity->getUuid());
     }
 
     public function testUuidIsAutomaticallyGenerated()
@@ -28,6 +28,17 @@ class AbstractEntityTest extends TestCase
         /** @var AbstractEntity $entity */
         $entity = $this->getMockForAbstractClass(AbstractEntity::class);
 
-        $this->assertInstanceOf(Uuid::class, $entity->getUuid());
+        $this->assertNotEmpty($entity->getUuid());
+        $this->assertTrue(Uuid::isValid($entity->getUuid()));
+    }
+
+    public function testUuidFromString()
+    {
+        $uuid = Uuid::uuid4()->toString();
+
+        /** @var AbstractEntity $entity */
+        $entity = $this->getMockForAbstractClass(AbstractEntity::class, [ $uuid ]);
+
+        $this->assertSame($uuid, $entity->getUuid());
     }
 }

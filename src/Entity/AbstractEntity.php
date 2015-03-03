@@ -14,10 +14,18 @@ abstract class AbstractEntity implements UuidProviderInterface
     use UuidProviderTrait;
 
     /**
-     * @param Uuid $uuid
+     * @param Uuid|string $uuid
      */
-    public function __construct(Uuid $uuid = null)
+    public function __construct($uuid = null)
     {
-        $this->uuid = $uuid ?: Uuid::uuid4();
+        if ($uuid !== null && ! $uuid instanceof Uuid) {
+            $uuid = Uuid::fromString($uuid);
+        }
+
+        if ($uuid === null) {
+            $uuid = Uuid::uuid4();
+        }
+
+        $this->uuid = $uuid->toString();
     }
 }

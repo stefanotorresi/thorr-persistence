@@ -7,12 +7,10 @@
 
 namespace Thorr\Persistence\Entity;
 
-use Rhumsaa\Uuid\Uuid;
-
 interface UuidProviderInterface
 {
     /**
-     * @return Uuid
+     * @return string
      */
     public function getUuid();
 }

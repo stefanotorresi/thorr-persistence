@@ -7,17 +7,15 @@
 
 namespace Thorr\Persistence\Entity;
 
-use Rhumsaa\Uuid\Uuid;
-
 trait UuidProviderTrait
 {
     /**
-     * @var Uuid
+     * @var string
      */
     protected $uuid;
 
     /**
-     * @return Uuid
+     * @return string
      */
     public function getUuid()
     {
