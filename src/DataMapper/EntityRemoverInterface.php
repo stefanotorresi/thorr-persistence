@@ -7,7 +7,7 @@
 
 namespace Thorr\Persistence\DataMapper;
 
-use Rhumsaa\Uuid\Uuid;
+use Ramsey\Uuid\Uuid;
 
 interface EntityRemoverInterface
 {

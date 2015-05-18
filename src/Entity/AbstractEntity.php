@@ -7,7 +7,7 @@
 
 namespace Thorr\Persistence\Entity;
 
-use Rhumsaa\Uuid\Uuid;
+use Ramsey\Uuid\Uuid;
 
 abstract class AbstractEntity implements UuidProviderInterface
 {

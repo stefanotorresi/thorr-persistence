@@ -17,12 +17,13 @@
         "zendframework/zend-validator": "~2.3",
         "fabpot/php-cs-fixer": "~1.5"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": "~5.5",
-        "rhumsaa/uuid": "~2.8"
+        "ramsey/uuid": "^3.0"
     },
     "suggest": {
-        "zendframework/zend-eventmanager": "required to use the EventManagerAware decorator",
         "zendframework/zend-servicemanager": "required to use DataMapperManager",
         "zendframework/zend-modulemanager": "required to load the library as a ZF2 module",
         "zendframework/zend-validator": "required to use entity validators"
