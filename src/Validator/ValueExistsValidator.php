@@ -15,7 +15,7 @@ class ValueExistsValidator extends AbstractEntityValidator
      * @var array Message templates
      */
     protected $messageTemplates = [
-        self::ERROR_VALUE_NOT_EXISTS => "Value not found",
+        self::ERROR_VALUE_NOT_EXISTS => 'Value not found',
     ];
 
     /**
