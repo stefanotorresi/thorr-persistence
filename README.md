@@ -15,3 +15,50 @@ Agnostic interfaces for a DataMapper implementation through vendor specific adap
 
 [thorr-persistence-doctrine]: http://github.com/stefanotorresi/thorr-persistence-doctrine
 [doctrine-orm]: http://www.doctrine-project.org
+
+## DataMapperManager usage
+
+This library provides an optional Zend Framework 2 plugin manager for `DataMapperInterface` instances, the `DataMapperManager`.
+
+It provides a method to retrieve data mappers for your entities: `DataMapperManager::getDataMapperForEntity($entity)`.
+
+Here is an example:
+
+```php
+$config = [
+    'entity_data_mapper_map' => [
+        Entity::class => 'EntityDataMapperServiceName',
+    ],
+    'factories' => [
+        'EntityDataMapperServiceName' => function () {
+            // return a DataMapperInterface            
+        },
+    ],
+];
+
+$dataMapperManager = new DataMapperManager($config);
+
+// retrieves the service configured as 'EntityDataMapperServiceName'
+$entityMapper = $dataMapperManager->getDataMapperForEntity(Entity::class);
+```
+
+To use the `DataMapperManager` you have to require `zendframework/zend-servicemanager` via Composer:
+
+```shell
+composer require zendframework/zend-servicemanager
+```
+
+### Usage in a ZF2 module
+
+When using the library as a Zend Framework 2 module, you can load the module `Thorr\Persistence` and implement 
+`DataMapperManagerConfigProviderInterface` in your modules to provide the configuration via the 
+`getDataMapperManagerConfig()` method.
+
+The module will also register in the main `ServiceManager` a `DataMapperManager` instance with is FQCN, 
+aliased with `DataMapperManager` name, so you can retrieve it as follows:
+
+```
+$serviceManager->get(DataMapperManager::class);
+// or
+$serviceManager->get('DataMapperManager');
+```
