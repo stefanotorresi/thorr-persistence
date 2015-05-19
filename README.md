@@ -54,8 +54,8 @@ When using the library as a Zend Framework 2 module, you can load the module `Th
 `DataMapperManagerConfigProviderInterface` in your modules to provide the configuration via the 
 `getDataMapperManagerConfig()` method.
 
-The module will also register in the main `ServiceManager` a `DataMapperManager` instance with is FQCN, 
-aliased with `DataMapperManager` name, so you can retrieve it as follows:
+The module will also register in the main `ServiceManager` a `DataMapperManager` instance with its FQCN, 
+aliased with the `DataMapperManager` name, so you can retrieve it as follows:
 
 ```
 $serviceManager->get(DataMapperManager::class);
