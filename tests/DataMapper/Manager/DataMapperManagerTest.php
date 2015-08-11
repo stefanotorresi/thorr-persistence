@@ -67,9 +67,9 @@ class DataMapperManagerTest extends TestCase
     }
 
     /**
-     * @param array $config
-     * @param $requestedDataMapperEntity
-     * @param bool  $expectedException
+     * @param array  $config
+     * @param string $requestedDataMapperEntity
+     * @param bool   $expectedException
      * @dataProvider configProvider
      */
     public function testGetDataMapperForEntity($config, $requestedDataMapperEntity, $expectedException)
