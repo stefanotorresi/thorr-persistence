@@ -15,7 +15,7 @@ use Zend\ServiceManager\Exception;
 /**
  * @method DataMapperInterface get($name)
  */
-class DataMapperManager extends AbstractPluginManager
+class DataMapperManager extends AbstractPluginManager implements DataMapperManagerInterface
 {
     /**
      * @var array
