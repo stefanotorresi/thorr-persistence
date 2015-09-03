@@ -47,9 +47,9 @@ class DataMapperManager extends AbstractPluginManager
             ));
         }
 
-        if (empty($dataMapper->getEntityClass())) {
+        if (! class_exists($dataMapper->getEntityClass())) {
             throw new Exception\RuntimeException(sprintf(
-                '%s::getEntityClass() must return a non empty value', get_class($dataMapper)
+                '%s::getEntityClass() must return a valid class', get_class($dataMapper)
             ));
         }
     }
@@ -72,7 +72,7 @@ class DataMapperManager extends AbstractPluginManager
 
         $dataMapper = $this->get($entityDMServiceName);
 
-        if ($dataMapper->getEntityClass() !== $entityClass) {
+        if (! is_a($dataMapper->getEntityClass(), $entityClass, true)) {
             throw new Exception\RuntimeException(sprintf(
                 '"%s" entity class mismatch: expected "%s", got "%s"',
                 $entityDMServiceName,
