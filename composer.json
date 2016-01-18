@@ -30,7 +30,7 @@
         "zendframework/zend-i18n": "^2.5",
         "zendframework/zend-console": "^2.5",
         "zendframework/zend-http": "^2.5",
-        "phpunit/phpunit": "^5.1"
+        "phpunit/phpunit": "^4.6"
     },
     "suggest": {
         "zendframework/zend-servicemanager": "required to use DataMapperManager",
