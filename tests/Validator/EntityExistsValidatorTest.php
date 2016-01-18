@@ -8,9 +8,9 @@
 namespace Thorr\Persistence\Test\Validator;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Thorr\Persistence\Validator\ValueExistsValidator;
+use Thorr\Persistence\Validator\EntityExistsValidator;
 
-class ValueExistsValidatorTest extends TestCase
+class EntityExistsValidatorTest extends TestCase
 {
     public function testIsValid()
     {
@@ -18,7 +18,7 @@ class ValueExistsValidatorTest extends TestCase
             return [ $value ];
         };
 
-        $validator = new ValueExistsValidator(['finder' => $finder]);
+        $validator = new EntityExistsValidator([ 'finder' => $finder]);
 
         $this->assertTrue($validator->isValid('foo'));
     }
@@ -29,10 +29,10 @@ class ValueExistsValidatorTest extends TestCase
             return [];
         };
 
-        $validator = new ValueExistsValidator(['finder' => $finder]);
+        $validator = new EntityExistsValidator([ 'finder' => $finder]);
 
         $this->assertFalse($validator->isValid('foo'));
 
-        $this->assertArrayHasKey(ValueExistsValidator::ERROR_VALUE_NOT_EXISTS, $validator->getMessages());
+        $this->assertArrayHasKey(EntityExistsValidator::ERROR_ENTITY_NOT_EXISTS, $validator->getMessages());
     }
 }

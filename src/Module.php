@@ -13,6 +13,7 @@ use Zend\ModuleManager\ModuleManagerInterface;
 use Zend\ServiceManager\ServiceManager;
 
 class Module implements
+    Feature\ValidatorProviderInterface,
     Feature\InitProviderInterface,
     Feature\ServiceProviderInterface
 {
@@ -36,10 +37,7 @@ class Module implements
     }
 
     /**
-     * Expected to return \Zend\ServiceManager\Config object or array to
-     * seed such an object.
-     *
-     * @return array|\Zend\ServiceManager\Config
+     * {@inheritdoc}
      */
     public function getServiceConfig()
     {
@@ -49,6 +47,19 @@ class Module implements
             ],
             'aliases' => [
                 'DataMapperManager' => DataMapper\Manager\DataMapperManager::class,
+            ],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidatorConfig()
+    {
+        return [
+            'factories' => [
+                Validator\EntityExistsValidator::class    => new Factory\EntityValidatorFactory(Validator\EntityExistsValidator::class),
+                Validator\EntityNotExistsValidator::class => new Factory\EntityValidatorFactory(Validator\EntityNotExistsValidator::class),
             ],
         ];
     }
