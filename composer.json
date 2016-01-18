@@ -6,9 +6,15 @@
     "authors": [
         {
             "name": "Stefano Torresi",
-            "email": "stefano@torresi.pro"
+            "email": "stefano@torresi.io"
         }
     ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^5.5",
+        "ramsey/uuid": "^3.0"
+    },
     "require-dev": {
         "zendframework/zend-eventmanager": "^2.5",
         "zendframework/zend-servicemanager": "^2.5",
@@ -23,13 +29,8 @@
         "zendframework/zend-log": "^2.5",
         "zendframework/zend-i18n": "^2.5",
         "zendframework/zend-console": "^2.5",
-        "zendframework/zend-http": "^2.5"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "require": {
-        "php": "~5.5",
-        "ramsey/uuid": "^3.0"
+        "zendframework/zend-http": "^2.5",
+        "phpunit/phpunit": "^5.1"
     },
     "suggest": {
         "zendframework/zend-servicemanager": "required to use DataMapperManager",
@@ -51,5 +52,15 @@
         "psr-4": {
             "Thorr\\Persistence\\Test\\": "tests/"
         }
+    },
+    "scripts": {
+        "check": [
+            "@cs-check",
+            "@test"
+        ],
+        "cs-check": "php-cs-fixer --version && php-cs-fixer fix -v --dry-run",
+        "cs-fix": "php-cs-fixer fix -v",
+        "test": "phpunit",
+        "test-coverage": "phpunit --coverage-clover ./build/coverage/clover.xml"
     }
 }
