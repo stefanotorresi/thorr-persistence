@@ -12,7 +12,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": "^5.5",
+        "php": ">=5.5",
         "ramsey/uuid": "^3.0"
     },
     "require-dev": {
@@ -30,7 +30,7 @@
         "zendframework/zend-i18n": "^2.5",
         "zendframework/zend-console": "^2.5",
         "zendframework/zend-http": "^2.5",
-        "phpunit/phpunit": "^4.6"
+        "phpunit/phpunit": "^5.1"
     },
     "suggest": {
         "zendframework/zend-servicemanager": "required to use DataMapperManager",
