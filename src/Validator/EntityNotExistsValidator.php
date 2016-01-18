@@ -23,7 +23,7 @@ class EntityNotExistsValidator extends AbstractEntityValidator
      */
     public function isValid($value)
     {
-        $result = $this->findResult($value);
+        $result = $this->findEntity($value);
 
         if (! $result || in_array($result, $this->excluded)) {
             return true;

@@ -9,13 +9,13 @@ namespace Thorr\Persistence\Validator;
 
 class EntityExistsValidator extends AbstractEntityValidator
 {
-    const ERROR_VALUE_NOT_EXISTS = 'valueNotExists';
+    const ERROR_ENTITY_NOT_EXISTS = 'entityNotExists';
 
     /**
      * @var array Message templates
      */
     protected $messageTemplates = [
-        self::ERROR_VALUE_NOT_EXISTS => 'Value not found',
+        self::ERROR_ENTITY_NOT_EXISTS => 'Entity not found',
     ];
 
     /**
@@ -23,13 +23,13 @@ class EntityExistsValidator extends AbstractEntityValidator
      */
     public function isValid($value)
     {
-        $result = $this->findResult($value);
+        $result = $this->findEntity($value);
 
         if ($result && ! in_array($result, $this->excluded)) {
             return true;
         }
 
-        $this->error(static::ERROR_VALUE_NOT_EXISTS);
+        $this->error(static::ERROR_ENTITY_NOT_EXISTS);
 
         return false;
     }
