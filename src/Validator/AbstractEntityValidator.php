@@ -7,6 +7,7 @@
 
 namespace Thorr\Persistence\Validator;
 
+use Thorr\Persistence\DataMapper\Manager\DataMapperManagerInterface;
 use Zend\Validator\AbstractValidator;
 use Zend\Validator\Exception;
 
@@ -28,14 +29,24 @@ abstract class AbstractEntityValidator extends AbstractValidator
     protected $excluded = [];
 
     /**
-     * @param array $options
-     *
-     * @throws Exception\InvalidArgumentException
+     * @var DataMapperManagerInterface
      */
-    public function __construct(array $options = null)
+    protected $dataMapperManager;
+
+    /**
+     * @param array                      $options
+     * @param DataMapperManagerInterface $dataMapperManager
+     */
+    public function __construct(array $options = null, DataMapperManagerInterface $dataMapperManager = null)
     {
-        if (! isset($options['finder'])) {
-            throw new Exception\InvalidArgumentException('No finder provided');
+        $this->dataMapperManager = $dataMapperManager;
+
+        if (! isset($options['finder']) && ! isset($options['entity_class'])) {
+            throw new Exception\InvalidArgumentException('No finder nor entity class provided');
+        }
+
+        if (isset($options['entity_class']) && $this->dataMapperManager) {
+            $options['finder'] = $this->dataMapperManager->getDataMapperForEntity($options['entity_class']);
         }
 
         if (! is_object($options['finder']) && ! is_callable($options['finder'])) {
@@ -109,11 +120,7 @@ abstract class AbstractEntityValidator extends AbstractValidator
      */
     public function setExcluded($excluded)
     {
-        if (! is_array($excluded)) {
-            $excluded = [ $excluded ];
-        }
-
-        $this->excluded = $excluded;
+        $this->excluded = (array) $excluded;
     }
 
     /**
@@ -121,7 +128,7 @@ abstract class AbstractEntityValidator extends AbstractValidator
      *
      * @return array
      */
-    protected function findResult($value)
+    protected function findEntity($value)
     {
         $result = $this->finder->{$this->findMethod}($value);
 
@@ -129,10 +136,6 @@ abstract class AbstractEntityValidator extends AbstractValidator
             return [];
         }
 
-        if (! is_array($result)) {
-            return [ $result ];
-        }
-
-        return $result;
+        return (array) $result;
     }
 }

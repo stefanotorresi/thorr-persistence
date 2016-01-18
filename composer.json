@@ -10,12 +10,20 @@
         }
     ],
     "require-dev": {
-        "zendframework/zend-eventmanager": "~2.3",
-        "zendframework/zend-servicemanager": "~2.3",
-        "zendframework/zend-di": "~2.3",
-        "zendframework/zend-modulemanager": "~2.3",
-        "zendframework/zend-validator": "~2.3",
-        "fabpot/php-cs-fixer": "~1.5"
+        "zendframework/zend-eventmanager": "^2.5",
+        "zendframework/zend-servicemanager": "^2.5",
+        "zendframework/zend-di": "^2.5",
+        "zendframework/zend-modulemanager": "^2.5",
+        "zendframework/zend-validator": "^2.5",
+        "fabpot/php-cs-fixer": "~1.5",
+        "zendframework/zend-mvc": "^2.5",
+        "zendframework/zend-loader": "^2.5",
+        "zendframework/zend-view": "^2.5",
+        "zendframework/zend-serializer": "^2.5",
+        "zendframework/zend-log": "^2.5",
+        "zendframework/zend-i18n": "^2.5",
+        "zendframework/zend-console": "^2.5",
+        "zendframework/zend-http": "^2.5"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -35,11 +43,12 @@
         }
     },
     "autoload" : {
-        "classmap": [
-            "Module.php"
-        ],
         "psr-4": {
-            "Thorr\\Persistence\\": "src/",
+            "Thorr\\Persistence\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "Thorr\\Persistence\\Test\\": "tests/"
         }
     }
