@@ -7,15 +7,15 @@
 
 namespace Thorr\Persistence\Validator;
 
-class ValueExistsValidator extends AbstractEntityValidator
+class EntityNotExistsValidator extends AbstractEntityValidator
 {
-    const ERROR_VALUE_NOT_EXISTS = 'valueNotExists';
+    const ERROR_VALUE_EXISTS = 'valueExists';
 
     /**
      * @var array Message templates
      */
     protected $messageTemplates = [
-        self::ERROR_VALUE_NOT_EXISTS => 'Value not found',
+        self::ERROR_VALUE_EXISTS => 'The value already exists',
     ];
 
     /**
@@ -25,11 +25,11 @@ class ValueExistsValidator extends AbstractEntityValidator
     {
         $result = $this->findResult($value);
 
-        if ($result && ! in_array($result, $this->excluded)) {
+        if (! $result || in_array($result, $this->excluded)) {
             return true;
         }
 
-        $this->error(static::ERROR_VALUE_NOT_EXISTS);
+        $this->error(static::ERROR_VALUE_EXISTS);
 
         return false;
     }
