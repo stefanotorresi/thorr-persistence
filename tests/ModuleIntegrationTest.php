@@ -8,11 +8,9 @@ namespace Thorr\Persistence\Test;
 use PHPUnit_Framework_TestCase as TestCase;
 use Thorr\Persistence;
 use Thorr\Persistence\DataMapper;
-use Thorr\Persistence\Test\Asset;
 use Zend\InputFilter\InputFilter;
 use Zend\Mvc\Application;
 use Zend\ServiceManager\ServiceManager;
-use Zend\Stdlib\ArrayUtils;
 
 class ModuleIntegrationTest extends TestCase
 {
@@ -72,14 +70,14 @@ class ModuleIntegrationTest extends TestCase
                         Asset\Entity::class => 'FooMapper',
                     ],
                     'services' => [
-                        'FooMapper' => $fooMapper
-                    ]
+                        'FooMapper' => $fooMapper,
+                    ],
                 ]
             )
         );
 
         $app = Application::init($this->appConfig);
-        $sm = $app->getServiceManager();
+        $sm  = $app->getServiceManager();
         $sm->setAllowOverride(true);
         $sm->setService(DataMapper\Manager\DataMapperManager::class, $dmm);
 
@@ -87,7 +85,7 @@ class ModuleIntegrationTest extends TestCase
         $app->getServiceManager()->get('InputFilterManager')->populateFactory($inputFilter);
 
         $inputFilter->add([
-            'name'    => 'test',
+            'name'       => 'test',
             'validators' => [
                 [
                     'name'    => Persistence\Validator\EntityExistsValidator::class,

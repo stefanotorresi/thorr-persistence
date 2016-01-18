@@ -58,10 +58,8 @@ class Module implements
     {
         return [
             'factories' => [
-                Validator\EntityExistsValidator::class =>
-                    new Factory\EntityValidatorFactory(Validator\EntityExistsValidator::class),
-                Validator\EntityNotExistsValidator::class =>
-                    new Factory\EntityValidatorFactory(Validator\EntityNotExistsValidator::class),
+                Validator\EntityExistsValidator::class    => new Factory\EntityValidatorFactory(Validator\EntityExistsValidator::class),
+                Validator\EntityNotExistsValidator::class => new Factory\EntityValidatorFactory(Validator\EntityNotExistsValidator::class),
             ],
         ];
     }

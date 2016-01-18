@@ -27,7 +27,7 @@ class AbstractEntityValidatorTest extends TestCase
 
         foreach ($arguments[0] as $property => $value) {
             $property = str_replace('_', '', $property);
-            $method = 'get' . $property;
+            $method   = 'get' . $property;
             if (! method_exists($validator, $method)) {
                 continue;
             }
@@ -46,7 +46,7 @@ class AbstractEntityValidatorTest extends TestCase
     {
         $this->setExpectedException($expectedExceptionClass, $expectedExceptionMessage);
 
-        /** @var AbstractEntityValidator $validator */
+        /* @var AbstractEntityValidator $validator */
         $this->getMockForAbstractClass(AbstractEntityValidator::class, $arguments);
     }
 
@@ -74,7 +74,7 @@ class AbstractEntityValidatorTest extends TestCase
                     [
                         'entity_class' => 'FooBar',
                     ],
-                    $dmm
+                    $dmm,
                 ],
             ],
         ];
@@ -101,13 +101,13 @@ class AbstractEntityValidatorTest extends TestCase
             [
                 [
                     [
-                        'finder' => $this->getMock(EntityFinderInterface::class),
+                        'finder'      => $this->getMock(EntityFinderInterface::class),
                         'find_method' => 'findBySomeThing',
-                    ]
+                    ],
                 ],
                 Exception\InvalidArgumentException::class,
                 "'findBySomeThing' method not found",
-            ]
+            ],
         ];
     }
 

@@ -5,9 +5,6 @@ $finder = Symfony\CS\Finder\DefaultFinder::create()
         __DIR__ . '/src',
         __DIR__ . '/tests',
     ])
-    ->append([
-        __DIR__ . '/Module.php'
-    ])
 ;
 
 $config = Symfony\CS\Config\Config::create()
