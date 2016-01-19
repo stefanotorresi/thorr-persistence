@@ -7,6 +7,7 @@
 
 namespace Thorr\Persistence\DataMapper\Manager;
 
+use Assert\Assertion;
 use Thorr\Persistence\DataMapper\DataMapperInterface;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ConfigInterface;
@@ -29,9 +30,14 @@ class DataMapperManager extends AbstractPluginManager implements DataMapperManag
     {
         parent::__construct($configuration);
 
-        if ($configuration instanceof DataMapperManagerConfig) {
-            $this->entityDataMapperMap = $configuration->getEntityDataMapperMap();
+        if (! $configuration) {
+            return;
         }
+
+        Assertion::isInstanceOf($configuration, DataMapperManagerConfig::class);
+        /* @var $configuration DataMapperManagerConfig */
+
+        $this->entityDataMapperMap = $configuration->getEntityDataMapperMap();
     }
 
     /**
@@ -39,19 +45,8 @@ class DataMapperManager extends AbstractPluginManager implements DataMapperManag
      */
     public function validatePlugin($dataMapper)
     {
-        if (! $dataMapper instanceof DataMapperInterface) {
-            throw new Exception\RuntimeException(sprintf(
-                'Invalid DataMapper type; expected %s, got %s',
-                DataMapperInterface::class,
-                (is_object($dataMapper) ? get_class($dataMapper) : gettype($dataMapper))
-            ));
-        }
-
-        if (! class_exists($dataMapper->getEntityClass())) {
-            throw new Exception\RuntimeException(sprintf(
-                '%s::getEntityClass() must return a valid class', get_class($dataMapper)
-            ));
-        }
+        Assertion::isInstanceOf($dataMapper, DataMapperInterface::class, 'Invalid data mapper');
+        Assertion::classExists($dataMapper->getEntityClass(), 'Invalid entity class');
     }
 
     /**
@@ -61,12 +56,10 @@ class DataMapperManager extends AbstractPluginManager implements DataMapperManag
      */
     public function getDataMapperForEntity($entityClass)
     {
-        if (! isset($this->entityDataMapperMap[$entityClass])) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                "Could not find data mapper service name for entity class '%s'",
-                $entityClass
-            ));
-        }
+        Assertion::keyIsset($this->entityDataMapperMap, $entityClass, sprintf(
+            "Could not find data mapper service name for entity class '%s'",
+            $entityClass
+        ));
 
         $entityDMServiceName = $this->entityDataMapperMap[$entityClass];
 

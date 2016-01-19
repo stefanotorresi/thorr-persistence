@@ -7,13 +7,14 @@
 
 namespace Thorr\Persistence\Test\DataMapper\Manager;
 
+use InvalidArgumentException;
 use PHPUnit_Framework_TestCase as TestCase;
 use Thorr\Persistence\DataMapper\DataMapperInterface;
 use Thorr\Persistence\DataMapper\Manager\DataMapperManager;
 use Thorr\Persistence\DataMapper\Manager\DataMapperManagerConfig;
 use Thorr\Persistence\Entity\SluggableInterface;
 use Thorr\Persistence\Test\Asset;
-use Zend\ServiceManager\Exception\InvalidArgumentException;
+use Zend\ServiceManager\Config;
 use Zend\ServiceManager\Exception\RuntimeException;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -46,13 +47,13 @@ class DataMapperManagerTest extends TestCase
                 // $dataMapper
                 new \stdClass(),
                 // $expectedException
-                [RuntimeException::class, 'Invalid DataMapper type'],
+                [ InvalidArgumentException::class, 'Invalid data mapper'],
             ],
             [
                 // $dataMapper
                 $this->getMock(DataMapperInterface::class),
                 // $expectedException
-                [ RuntimeException::class, 'getEntityClass() must return a valid class' ],
+                [ InvalidArgumentException::class, 'Invalid entity class' ],
             ],
             [
                 // $dataMapper
@@ -237,5 +238,15 @@ class DataMapperManagerTest extends TestCase
                 null,
             ],
         ];
+    }
+
+    public function testConstructorNeedsADataMapperManagerConfigIfNotNull()
+    {
+        $this->setExpectedException(
+            InvalidArgumentException::class,
+            'expected to be instanceof of "Thorr\Persistence\DataMapper\Manager\DataMapperManagerConfig"'
+        );
+
+        new DataMapperManager(new Config());
     }
 }
