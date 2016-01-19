@@ -9,7 +9,7 @@ namespace Thorr\Persistence\DataMapper;
 
 use Ramsey\Uuid\Uuid;
 
-interface EntityFinderInterface
+interface EntityFinderInterface extends DataMapperInterface
 {
     /**
      * @param Uuid|string $uuid

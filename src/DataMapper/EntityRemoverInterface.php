@@ -9,7 +9,7 @@ namespace Thorr\Persistence\DataMapper;
 
 use Ramsey\Uuid\Uuid;
 
-interface EntityRemoverInterface
+interface EntityRemoverInterface extends DataMapperInterface
 {
     /**
      * @param object $entity

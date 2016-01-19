@@ -10,7 +10,7 @@ namespace Thorr\Persistence\DataMapper;
 /**
  * BEHOLD! I'm the entity saver!
  */
-interface EntitySaverInterface
+interface EntitySaverInterface extends DataMapperInterface
 {
     /**
      * @param object $entity

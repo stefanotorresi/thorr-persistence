@@ -7,7 +7,7 @@
 
 namespace Thorr\Persistence\DataMapper;
 
-interface SluggableFinderInterface
+interface SluggableFinderInterface extends DataMapperInterface
 {
     /**
      * @param string $slug

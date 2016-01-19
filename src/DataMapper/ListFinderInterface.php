@@ -9,7 +9,7 @@ namespace Thorr\Persistence\DataMapper;
 
 use Traversable;
 
-interface ListFinderInterface
+interface ListFinderInterface extends DataMapperInterface
 {
     /**
      * @param array $params

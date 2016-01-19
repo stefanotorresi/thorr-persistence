@@ -7,11 +7,7 @@
 
 namespace Thorr\Persistence\DataMapper;
 
-interface DataMapperInterface extends
-    EntityFinderInterface,
-    EntityRemoverInterface,
-    EntitySaverInterface,
-    EntityUpdaterInterface
+interface DataMapperInterface
 {
     /**
      * The entity class handled the adapter instance

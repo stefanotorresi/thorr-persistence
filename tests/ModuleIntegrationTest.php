@@ -61,7 +61,7 @@ class ModuleIntegrationTest extends TestCase
 
     public function testValidatorConfigCanBeInitializedByZendInputFilterFactory()
     {
-        $fooMapper = $this->getMock(DataMapper\DataMapperInterface::class);
+        $fooMapper = $this->getMock(DataMapper\EntityFinderInterface::class);
         $fooMapper->expects($this->any())->method('getEntityClass')->willReturn(Asset\Entity::class);
         $dmm = new DataMapper\Manager\DataMapperManager(
             new  DataMapper\Manager\DataMapperManagerConfig(
