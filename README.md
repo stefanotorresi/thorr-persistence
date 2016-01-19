@@ -25,7 +25,7 @@ It provides a method to retrieve data mappers for your entities: `DataMapperMana
 Here is an example:
 
 ```php
-$config = [
+$config = new DataMapperManagerConfig([
     'entity_data_mapper_map' => [
         Entity::class => 'EntityDataMapperServiceName',
     ],
@@ -34,7 +34,7 @@ $config = [
             // return a DataMapperInterface            
         },
     ],
-];
+]);
 
 $dataMapperManager = new DataMapperManager($config);
 
@@ -57,7 +57,7 @@ When using the library as a Zend Framework 2 module, you can load the module `Th
 The module will also register in the main `ServiceManager` a `DataMapperManager` instance with its FQCN, 
 aliased with the `DataMapperManager` name, so you can retrieve it as follows:
 
-```
+```php
 $serviceManager->get(DataMapperManager::class);
 // or
 $serviceManager->get('DataMapperManager');
