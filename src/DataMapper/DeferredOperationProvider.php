@@ -9,8 +9,6 @@ interface DeferredOperationProvider
 {
     /**
      * Commits any in-memory change previously registered with deferred methods
-     *
-     * @return void
      */
     public function commit();
 }
