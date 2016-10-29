@@ -8,10 +8,10 @@
 namespace Thorr\Persistence\Test\DataMapper\Manager;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Thorr\Persistence\Test\Asset;
 use Thorr\Persistence\DataMapper\DataMapperInterface;
 use Thorr\Persistence\DataMapper\Manager\DataMapperManager;
 use Thorr\Persistence\DataMapper\Manager\DataMapperManagerFactory;
+use Thorr\Persistence\Test\Asset;
 use Zend\ServiceManager\Di\DiAbstractServiceFactory;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -68,9 +68,9 @@ class DataMapperManagerFactoryTest extends TestCase
             ->willReturn([
                 'thorr_persistence_dmm' => [
                     'services' => [
-                        'foo' => $dataMapper
-                    ]
-                ]
+                        'foo' => $dataMapper,
+                    ],
+                ],
             ])
         ;
 
