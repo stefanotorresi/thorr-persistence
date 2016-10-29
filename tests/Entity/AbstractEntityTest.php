@@ -10,6 +10,7 @@ namespace Thorr\Persistence\Test\Entity;
 use PHPUnit_Framework_TestCase as TestCase;
 use Ramsey\Uuid\Uuid;
 use Thorr\Persistence\Entity\AbstractEntity;
+use Thorr\Persistence\Test\Asset\TestEntity;
 
 class AbstractEntityTest extends TestCase
 {
@@ -40,5 +41,13 @@ class AbstractEntityTest extends TestCase
         $entity = $this->getMockForAbstractClass(AbstractEntity::class, [ $uuid ]);
 
         $this->assertSame($uuid, $entity->getUuid());
+    }
+
+    public function testCloningChangesUuid()
+    {
+        $entity = new TestEntity();
+
+        $clone = clone $entity;
+        $this->assertNotEquals($entity->getUuid(), $clone->getUuid());
     }
 }

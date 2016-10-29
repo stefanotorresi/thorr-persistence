@@ -28,4 +28,12 @@ abstract class AbstractEntity implements UuidProviderInterface
 
         $this->uuid = $uuid->toString();
     }
+
+    /**
+     * ensure uuid changes on cloning
+     */
+    public function __clone()
+    {
+        $this->uuid = Uuid::uuid4()->toString();
+    }
 }
