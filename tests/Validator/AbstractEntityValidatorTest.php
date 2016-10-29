@@ -59,7 +59,12 @@ class AbstractEntityValidatorTest extends TestCase
 
         return [
             [
-                [ [ 'finder' => function () { } ] ],
+                [
+                    [
+                        'finder' => function () {
+                        },
+                    ],
+                ],
             ],
             [
                 [
@@ -114,7 +119,8 @@ class AbstractEntityValidatorTest extends TestCase
     public function testExcludedSetter()
     {
         $options = [
-            'finder'   => function () {},
+            'finder'   => function () {
+            },
             'excluded' => 'foo',
         ];
 
@@ -126,7 +132,9 @@ class AbstractEntityValidatorTest extends TestCase
 
     public function testNonArrayFinderResultIsReturnedInArray()
     {
-        $finder = function ($val) { return $val; };
+        $finder = function ($val) {
+            return $val;
+        };
         /** @var AbstractEntityValidator $validator */
         $validator = $this->getMockForAbstractClass(AbstractEntityValidator::class, [['finder' => $finder]]);
 

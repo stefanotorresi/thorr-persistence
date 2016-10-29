@@ -9,5 +9,4 @@ use Thorr\Persistence\Entity\AbstractEntity;
 
 class TestEntity extends AbstractEntity
 {
-
 }
