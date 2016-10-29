@@ -7,6 +7,7 @@
 
 namespace Thorr\Persistence\Test\Entity;
 
+use Doctrine\Instantiator\Instantiator;
 use PHPUnit_Framework_TestCase as TestCase;
 use Ramsey\Uuid\Uuid;
 use Thorr\Persistence\Entity\AbstractEntity;
@@ -49,5 +50,15 @@ class AbstractEntityTest extends TestCase
 
         $clone = clone $entity;
         $this->assertNotEquals($entity->getUuid(), $clone->getUuid());
+    }
+
+    public function testCloningDoesntRefreshUuidIfWasntSet()
+    {
+        $instantiator = new Instantiator();
+        /** @var TestEntity $entity */
+        $entity = $instantiator->instantiate(TestEntity::class);
+        $this->assertNull($entity->getUuid());
+        $clone = clone $entity;
+        $this->assertNull($clone->getUuid());
     }
 }

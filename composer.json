@@ -31,7 +31,8 @@
         "zendframework/zend-console": "^2.5",
         "zendframework/zend-http": "^2.5",
         "phpunit/phpunit": "^4.6",
-        "friendsofphp/php-cs-fixer": "^1.12"
+        "friendsofphp/php-cs-fixer": "^1.12",
+        "doctrine/instantiator": "^1.0"
     },
     "suggest": {
         "zendframework/zend-servicemanager": "required to use DataMapperManager",

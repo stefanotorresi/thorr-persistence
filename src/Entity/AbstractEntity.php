@@ -34,6 +34,13 @@ abstract class AbstractEntity implements UuidProviderInterface
      */
     public function __clone()
     {
+        if (! $this->uuid) {
+            /*
+             * ensure doctrine proxies compatibility
+             * @see http://doctrine-orm.readthedocs.io/en/latest/cookbook/implementing-wakeup-or-clone.html
+             */
+            return;
+        }
         $this->uuid = Uuid::uuid4()->toString();
     }
 }
