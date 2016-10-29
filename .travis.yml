@@ -12,9 +12,6 @@ matrix:
     env:
       - CHECK_CS=true
   - php: 7.1
-  - php: hhvm
-  allow_failures:
-  - php: hhvm
 
 cache:
  directories:
